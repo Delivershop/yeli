@@ -103,7 +103,7 @@ class _SplashScreenWidgetState extends State<SplashScreenWidget> {
                     currentUserUid,
                   ),
                 );
-                if (_model.role?.firstOrNull?.role == 'Client') {
+                if (_model.role?.firstOrNull?.role == 'client') {
                   context.pushNamed(CustomerhomepageWidget.routeName);
                 } else {
                   if (_model.role?.firstOrNull?.role == 'prestataire') {

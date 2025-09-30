@@ -85,7 +85,7 @@ class _SettingsPageWidgetState extends State<SettingsPageWidget> {
               size: 24.0,
             ),
             onPressed: () {
-              print('IconButton pressed ...');
+              context.safePop();
             },
           ),
           title: Text(
@@ -475,7 +475,10 @@ class _SettingsPageWidgetState extends State<SettingsPageWidget> {
                             ),
                             FFButtonWidget(
                               onPressed: () {
-                                print('Button pressed ...');
+                                // Navigate to edit profile page (to be implemented)
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                  SnackBar(content: Text('Modification du profil bientôt disponible')),
+                                );
                               },
                               text: 'Modifier mes informations',
                               options: FFButtonOptions(
@@ -561,7 +564,10 @@ class _SettingsPageWidgetState extends State<SettingsPageWidget> {
                             ),
                             FFButtonWidget(
                               onPressed: () {
-                                print('Button pressed ...');
+                                // Navigate to change password page (to be implemented)
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                  SnackBar(content: Text('Changement de mot de passe bientôt disponible')),
+                                );
                               },
                               text: 'Changer mon mot de passe',
                               icon: Icon(
@@ -654,7 +660,12 @@ class _SettingsPageWidgetState extends State<SettingsPageWidget> {
                             ),
                             FFButtonWidget(
                               onPressed: () {
-                                print('Button pressed ...');
+                                authManager.signOut().then((_) {
+                                  context.pushNamedAuth(
+                                    ChoixduroleWidget.routeName,
+                                    context.mounted,
+                                  );
+                                });
                               },
                               text: 'Déconnexion',
                               icon: Icon(
