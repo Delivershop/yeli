@@ -83,10 +83,10 @@ class SupabaseAuthManager extends AuthManager with EmailSignInManager {
     required String email,
     required BuildContext context,
     String? redirectTo,
+    String? redirectTo,
   }) async {
     try {
-      await SupaFlow.client.auth
-          .resetPasswordForEmail(email, redirectTo: redirectTo);
+      await SupaFlow.client.auth.resetPasswordForEmail(email);
     } on AuthException catch (e) {
       ScaffoldMessenger.of(context).hideCurrentSnackBar();
       ScaffoldMessenger.of(context).showSnackBar(
@@ -96,6 +96,28 @@ class SupabaseAuthManager extends AuthManager with EmailSignInManager {
     }
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(content: Text('Password reset email sent')),
+    );
+  }
+
+  Future updatePassword({
+    required String newPassword,
+    required BuildContext context,
+  }) async {
+    try {
+      if (!loggedIn) {
+        print('Error: update password attempted with no logged in user!');
+        return;
+      }
+      await currentUser?.updatePassword(newPassword);
+    } on AuthException catch (e) {
+      ScaffoldMessenger.of(context).hideCurrentSnackBar();
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('Error: ${e.message!}')),
+      );
+      return;
+    }
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(content: Text('Password updated successfully')),
     );
   }
 

@@ -406,7 +406,7 @@ class _ContactPrestatairePageWidgetState
                     children: [
                       FFButtonWidget(
                         onPressed: () {
-                          print('Button pressed ...');
+                          launchURL('https://wa.me/+22507123456?text=Bonjour%20je%20viens%20de%20Yeli');
                         },
                         text: 'Envoyer un message sur WhatsApp',
                         icon: Icon(
@@ -447,7 +447,7 @@ class _ContactPrestatairePageWidgetState
                       ),
                       FFButtonWidget(
                         onPressed: () {
-                          print('Button pressed ...');
+                          launchURL('tel:+22507123456');
                         },
                         text: 'Appeler le prestataire',
                         icon: Icon(

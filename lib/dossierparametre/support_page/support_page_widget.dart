@@ -269,7 +269,7 @@ class _SupportPageWidgetState extends State<SupportPageWidget> {
                             ),
                             FFButtonWidget(
                               onPressed: () {
-                                print('Button pressed ...');
+                                launchURL('https://wa.me/225000000000?text=Bonjour%20j\'ai%20besoin%20d\'aide%20sur%20Yeli');
                               },
                               text: 'Contacter le support via WhatsApp',
                               icon: Icon(

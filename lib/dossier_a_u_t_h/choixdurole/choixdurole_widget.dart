@@ -57,11 +57,6 @@ class _ChoixduroleWidgetState extends State<ChoixduroleWidget> {
   void initState() {
     super.initState();
     _model = createModel(context, () => ChoixduroleModel());
-
-    // On page load action.
-    SchedulerBinding.instance.addPostFrameCallback((_) async {
-      context.pushNamed(ChoixduroleWidget.routeName);
-    });
   }
 
   @override

@@ -20,12 +20,12 @@ export 'auth3_copy_model.dart';
 class Auth3CopyWidget extends StatefulWidget {
   const Auth3CopyWidget({
     super.key,
-    required this.role,
-  });
+    String? role,
+  }) : this.role = role ?? 'prestataire';
 
-  final String? role;
+  final String role;
 
-  static String routeName = 'Auth3Copy';
+  static String routeName = 'auth3Copy';
   static String routePath = '/auth3Copy';
 
   @override
@@ -94,62 +94,16 @@ class _Auth3CopyWidgetState extends State<Auth3CopyWidget>
             begin: Offset(0.0, 80.0),
             end: Offset(0.0, 0.0),
           ),
-          ScaleEffect(
-            curve: Curves.easeInOut,
-            delay: 150.0.ms,
-            duration: 400.0.ms,
-            begin: Offset(0.8, 0.8),
-            end: Offset(1.0, 1.0),
-          ),
-        ],
-      ),
-      'columnOnPageLoadAnimation1': AnimationInfo(
-        trigger: AnimationTrigger.onPageLoad,
-        effectsBuilder: () => [
-          VisibilityEffect(duration: 300.ms),
-          FadeEffect(
-            curve: Curves.easeInOut,
-            delay: 300.0.ms,
-            duration: 400.0.ms,
-            begin: 0.0,
-            end: 1.0,
-          ),
-          MoveEffect(
-            curve: Curves.easeInOut,
-            delay: 300.0.ms,
-            duration: 400.0.ms,
-            begin: Offset(0.0, 20.0),
-            end: Offset(0.0, 0.0),
-          ),
-        ],
-      ),
-      'columnOnPageLoadAnimation2': AnimationInfo(
-        trigger: AnimationTrigger.onPageLoad,
-        effectsBuilder: () => [
-          VisibilityEffect(duration: 300.ms),
-          FadeEffect(
-            curve: Curves.easeInOut,
-            delay: 300.0.ms,
-            duration: 400.0.ms,
-            begin: 0.0,
-            end: 1.0,
-          ),
-          MoveEffect(
-            curve: Curves.easeInOut,
-            delay: 300.0.ms,
-            duration: 400.0.ms,
-            begin: Offset(0.0, 20.0),
-            end: Offset(0.0, 0.0),
-          ),
         ],
       ),
     });
+
+    setupAnimations(animationsMap.values, this);
   }
 
   @override
   void dispose() {
     _model.dispose();
-
     super.dispose();
   }
 
@@ -162,59 +116,103 @@ class _Auth3CopyWidgetState extends State<Auth3CopyWidget>
       },
       child: Scaffold(
         key: scaffoldKey,
-        backgroundColor: FlutterFlowTheme.of(context).secondaryBackground,
+        backgroundColor: Color(0xFFF1F4F8),
         body: SafeArea(
           top: true,
-          child: Column(
-            mainAxisSize: MainAxisSize.max,
-            children: [
-              Padding(
-                padding: EdgeInsetsDirectional.fromSTEB(0.0, 32.0, 0.0, 16.0),
-                child: Text(
-                  'YELI Prestataire',
-                  style: FlutterFlowTheme.of(context).displaySmall.override(
-                        font: GoogleFonts.interTight(
-                          fontWeight: FlutterFlowTheme.of(context)
-                              .displaySmall
-                              .fontWeight,
-                          fontStyle: FlutterFlowTheme.of(context)
-                              .displaySmall
-                              .fontStyle,
-                        ),
-                        color: Color(0xFFFF0176),
-                        letterSpacing: 0.0,
-                        fontWeight: FlutterFlowTheme.of(context)
-                            .displaySmall
-                            .fontWeight,
-                        fontStyle:
-                            FlutterFlowTheme.of(context).displaySmall.fontStyle,
-                      ),
-                ),
+          child: Align(
+            alignment: AlignmentDirectional(0.0, -1.0),
+            child: Container(
+              width: double.infinity,
+              height: double.infinity,
+              constraints: BoxConstraints(
+                maxWidth: 570.0,
               ),
-              Expanded(
-                child: Align(
-                  alignment: AlignmentDirectional(0.0, 0.0),
-                  child: Padding(
-                    padding:
-                        EdgeInsetsDirectional.fromSTEB(0.0, 12.0, 0.0, 12.0),
+              decoration: BoxDecoration(
+                color: Color(0xFFF1F4F8),
+              ),
+              child: Column(
+                mainAxisSize: MainAxisSize.max,
+                children: [
+                  Expanded(
                     child: Container(
                       width: double.infinity,
-                      height: MediaQuery.sizeOf(context).height * 0.8,
-                      constraints: BoxConstraints(
-                        maxWidth: 530.0,
-                      ),
+                      height: 500.0,
                       decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(12.0),
+                        color: Color(0xFFF1F4F8),
                       ),
                       child: Padding(
-                        padding:
-                            EdgeInsetsDirectional.fromSTEB(0.0, 16.0, 0.0, 0.0),
+                        padding: EdgeInsets.all(24.0),
                         child: Column(
                           children: [
+                            Align(
+                              alignment: Alignment(0.0, 0),
+                              child: FlutterFlowButtonTabBar(
+                                useToggleButtonStyle: false,
+                                labelStyle: FlutterFlowTheme.of(context)
+                                    .titleMedium
+                                    .override(
+                                      font: GoogleFonts.inter(
+                                        fontWeight: FontWeight.w600,
+                                        fontStyle: FlutterFlowTheme.of(context)
+                                            .titleMedium
+                                            .fontStyle,
+                                      ),
+                                      color: Color(0xFF14181B),
+                                      fontSize: 18.0,
+                                      letterSpacing: 0.0,
+                                      fontWeight: FontWeight.w600,
+                                      fontStyle: FlutterFlowTheme.of(context)
+                                          .titleMedium
+                                          .fontStyle,
+                                    ),
+                                unselectedLabelStyle: FlutterFlowTheme.of(context)
+                                    .titleMedium
+                                    .override(
+                                      font: GoogleFonts.inter(
+                                        fontWeight: FontWeight.w500,
+                                        fontStyle: FlutterFlowTheme.of(context)
+                                            .titleMedium
+                                            .fontStyle,
+                                      ),
+                                      color: Color(0xFF677681),
+                                      fontSize: 18.0,
+                                      letterSpacing: 0.0,
+                                      fontWeight: FontWeight.w500,
+                                      fontStyle: FlutterFlowTheme.of(context)
+                                          .titleMedium
+                                          .fontStyle,
+                                    ),
+                                labelColor: Color(0xFF14181B),
+                                unselectedLabelColor: Color(0xFF677681),
+                                backgroundColor: Color(0xFFF83B46),
+                                unselectedBackgroundColor: Colors.white,
+                                borderColor: Color(0xFFE3E7ED),
+                                unselectedBorderColor: Color(0xFFE3E7ED),
+                                borderWidth: 2.0,
+                                borderRadius: 12.0,
+                                elevation: 0.0,
+                                buttonMargin: EdgeInsetsDirectional.fromSTEB(
+                                    8.0, 0.0, 8.0, 0.0),
+                                padding: EdgeInsets.all(4.0),
+                                tabs: [
+                                  Tab(
+                                    text: 'S\'inscrire',
+                                  ),
+                                  Tab(
+                                    text: 'Se connecter',
+                                  ),
+                                ],
+                                controller: _model.tabBarController,
+                                onTap: (i) async {
+                                  [() async {}, () async {}][i]();
+                                },
+                              ),
+                            ),
                             Expanded(
                               child: TabBarView(
                                 controller: _model.tabBarController,
                                 children: [
+                                  // Sign Up Tab for Prestataire
                                   Align(
                                     alignment: AlignmentDirectional(0.0, -1.0),
                                     child: Padding(
@@ -226,46 +224,24 @@ class _Auth3CopyWidgetState extends State<Auth3CopyWidget>
                                           crossAxisAlignment:
                                               CrossAxisAlignment.start,
                                           children: [
-                                            if (responsiveVisibility(
-                                              context: context,
-                                              phone: false,
-                                              tablet: false,
-                                            ))
-                                              Container(
-                                                width: 230.0,
-                                                height: 16.0,
-                                                decoration: BoxDecoration(
-                                                  color: FlutterFlowTheme.of(
-                                                          context)
-                                                      .secondaryBackground,
-                                                ),
-                                              ),
                                             Text(
-                                              'S\'inscrire',
+                                              'Devenir prestataire',
                                               textAlign: TextAlign.start,
-                                              style: FlutterFlowTheme.of(
-                                                      context)
+                                              style: FlutterFlowTheme.of(context)
                                                   .headlineMedium
                                                   .override(
-                                                    font:
-                                                        GoogleFonts.interTight(
-                                                      fontWeight:
-                                                          FlutterFlowTheme.of(
-                                                                  context)
-                                                              .headlineMedium
-                                                              .fontWeight,
+                                                    font: GoogleFonts.sora(
+                                                      fontWeight: FontWeight.bold,
                                                       fontStyle:
                                                           FlutterFlowTheme.of(
                                                                   context)
                                                               .headlineMedium
                                                               .fontStyle,
                                                     ),
+                                                    color: Color(0xFF14181B),
+                                                    fontSize: 32.0,
                                                     letterSpacing: 0.0,
-                                                    fontWeight:
-                                                        FlutterFlowTheme.of(
-                                                                context)
-                                                            .headlineMedium
-                                                            .fontWeight,
+                                                    fontWeight: FontWeight.bold,
                                                     fontStyle:
                                                         FlutterFlowTheme.of(
                                                                 context)
@@ -275,46 +251,40 @@ class _Auth3CopyWidgetState extends State<Auth3CopyWidget>
                                             ),
                                             Padding(
                                               padding: EdgeInsetsDirectional
-                                                  .fromSTEB(
-                                                      0.0, 4.0, 0.0, 24.0),
+                                                  .fromSTEB(0.0, 4.0, 0.0, 24.0),
                                               child: Text(
-                                                'Créer votre compte',
+                                                'Rejoignez notre réseau de prestataires',
                                                 textAlign: TextAlign.start,
-                                                style:
-                                                    FlutterFlowTheme.of(context)
-                                                        .labelMedium
-                                                        .override(
-                                                          font:
-                                                              GoogleFonts.inter(
-                                                            fontWeight:
-                                                                FlutterFlowTheme.of(
-                                                                        context)
-                                                                    .labelMedium
-                                                                    .fontWeight,
-                                                            fontStyle:
-                                                                FlutterFlowTheme.of(
-                                                                        context)
-                                                                    .labelMedium
-                                                                    .fontStyle,
-                                                          ),
-                                                          letterSpacing: 0.0,
-                                                          fontWeight:
-                                                              FlutterFlowTheme.of(
-                                                                      context)
-                                                                  .labelMedium
-                                                                  .fontWeight,
-                                                          fontStyle:
-                                                              FlutterFlowTheme.of(
-                                                                      context)
-                                                                  .labelMedium
-                                                                  .fontStyle,
-                                                        ),
+                                                style: FlutterFlowTheme.of(
+                                                        context)
+                                                    .labelMedium
+                                                    .override(
+                                                      font: GoogleFonts.inter(
+                                                        fontWeight:
+                                                            FontWeight.normal,
+                                                        fontStyle:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .labelMedium
+                                                                .fontStyle,
+                                                      ),
+                                                      color: Color(0xFF677681),
+                                                      fontSize: 14.0,
+                                                      letterSpacing: 0.0,
+                                                      fontWeight:
+                                                          FontWeight.normal,
+                                                      fontStyle:
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .labelMedium
+                                                              .fontStyle,
+                                                    ),
                                               ),
                                             ),
+                                            // Form fields for prestataire
                                             Padding(
                                               padding: EdgeInsetsDirectional
-                                                  .fromSTEB(
-                                                      0.0, 0.0, 0.0, 16.0),
+                                                  .fromSTEB(0.0, 0.0, 0.0, 16.0),
                                               child: Container(
                                                 width: double.infinity,
                                                 child: TextFormField(
@@ -322,51 +292,45 @@ class _Auth3CopyWidgetState extends State<Auth3CopyWidget>
                                                       .nomTextFieldTextController,
                                                   focusNode: _model
                                                       .nomTextFieldFocusNode,
-                                                  autofocus: true,
+                                                  autofocus: false,
                                                   autofillHints: [
                                                     AutofillHints.name
                                                   ],
                                                   obscureText: false,
                                                   decoration: InputDecoration(
-                                                    labelText: 'Nom Prenoms',
-                                                    labelStyle: FlutterFlowTheme
-                                                            .of(context)
-                                                        .labelLarge
-                                                        .override(
-                                                          font:
-                                                              GoogleFonts.inter(
-                                                            fontWeight:
-                                                                FlutterFlowTheme.of(
+                                                    labelText: 'Nom complet',
+                                                    labelStyle:
+                                                        FlutterFlowTheme.of(
+                                                                context)
+                                                            .labelMedium
+                                                            .override(
+                                                              font: GoogleFonts
+                                                                  .inter(
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .normal,
+                                                                fontStyle: FlutterFlowTheme.of(
                                                                         context)
-                                                                    .labelLarge
-                                                                    .fontWeight,
-                                                            fontStyle:
-                                                                FlutterFlowTheme.of(
-                                                                        context)
-                                                                    .labelLarge
+                                                                    .labelMedium
                                                                     .fontStyle,
-                                                          ),
-                                                          letterSpacing: 0.0,
-                                                          fontWeight:
-                                                              FlutterFlowTheme.of(
-                                                                      context)
-                                                                  .labelLarge
-                                                                  .fontWeight,
-                                                          fontStyle:
-                                                              FlutterFlowTheme.of(
-                                                                      context)
-                                                                  .labelLarge
+                                                              ),
+                                                              color: Color(
+                                                                  0xFF677681),
+                                                              fontSize: 14.0,
+                                                              letterSpacing: 0.0,
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .normal,
+                                                              fontStyle: FlutterFlowTheme
+                                                                      .of(context)
+                                                                  .labelMedium
                                                                   .fontStyle,
-                                                        ),
-                                                    hintText:
-                                                        'Entree votre nom complet',
+                                                            ),
                                                     enabledBorder:
                                                         OutlineInputBorder(
                                                       borderSide: BorderSide(
                                                         color:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .alternate,
+                                                            Color(0xFFE3E7ED),
                                                         width: 2.0,
                                                       ),
                                                       borderRadius:
@@ -377,9 +341,7 @@ class _Auth3CopyWidgetState extends State<Auth3CopyWidget>
                                                         OutlineInputBorder(
                                                       borderSide: BorderSide(
                                                         color:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .primary,
+                                                            Color(0xFFF83B46),
                                                         width: 2.0,
                                                       ),
                                                       borderRadius:
@@ -390,9 +352,7 @@ class _Auth3CopyWidgetState extends State<Auth3CopyWidget>
                                                         OutlineInputBorder(
                                                       borderSide: BorderSide(
                                                         color:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .error,
+                                                            Color(0xFFFF5963),
                                                         width: 2.0,
                                                       ),
                                                       borderRadius:
@@ -403,9 +363,7 @@ class _Auth3CopyWidgetState extends State<Auth3CopyWidget>
                                                         OutlineInputBorder(
                                                       borderSide: BorderSide(
                                                         color:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .error,
+                                                            Color(0xFFFF5963),
                                                         width: 2.0,
                                                       ),
                                                       borderRadius:
@@ -413,46 +371,39 @@ class _Auth3CopyWidgetState extends State<Auth3CopyWidget>
                                                               12.0),
                                                     ),
                                                     filled: true,
-                                                    fillColor: FlutterFlowTheme
-                                                            .of(context)
-                                                        .secondaryBackground,
+                                                    fillColor: Colors.white,
                                                     contentPadding:
-                                                        EdgeInsets.all(24.0),
+                                                        EdgeInsetsDirectional
+                                                            .fromSTEB(24.0, 24.0,
+                                                                20.0, 24.0),
                                                   ),
                                                   style: FlutterFlowTheme.of(
                                                           context)
-                                                      .bodyLarge
+                                                      .bodyMedium
                                                       .override(
                                                         font: GoogleFonts.inter(
                                                           fontWeight:
-                                                              FlutterFlowTheme.of(
-                                                                      context)
-                                                                  .bodyLarge
-                                                                  .fontWeight,
+                                                              FontWeight.normal,
                                                           fontStyle:
                                                               FlutterFlowTheme.of(
                                                                       context)
-                                                                  .bodyLarge
+                                                                  .bodyMedium
                                                                   .fontStyle,
                                                         ),
+                                                        color:
+                                                            Color(0xFF14181B),
+                                                        fontSize: 14.0,
                                                         letterSpacing: 0.0,
                                                         fontWeight:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .bodyLarge
-                                                                .fontWeight,
+                                                            FontWeight.normal,
                                                         fontStyle:
                                                             FlutterFlowTheme.of(
                                                                     context)
-                                                                .bodyLarge
+                                                                .bodyMedium
                                                                 .fontStyle,
                                                       ),
-                                                  keyboardType:
-                                                      TextInputType.name,
                                                   cursorColor:
-                                                      FlutterFlowTheme.of(
-                                                              context)
-                                                          .primary,
+                                                      Color(0xFFF83B46),
                                                   validator: _model
                                                       .nomTextFieldTextControllerValidator
                                                       .asValidator(context),
@@ -461,8 +412,7 @@ class _Auth3CopyWidgetState extends State<Auth3CopyWidget>
                                             ),
                                             Padding(
                                               padding: EdgeInsetsDirectional
-                                                  .fromSTEB(
-                                                      0.0, 0.0, 0.0, 16.0),
+                                                  .fromSTEB(0.0, 0.0, 0.0, 16.0),
                                               child: Container(
                                                 width: double.infinity,
                                                 child: TextFormField(
@@ -470,52 +420,45 @@ class _Auth3CopyWidgetState extends State<Auth3CopyWidget>
                                                       .telephoneTextFieldTextController,
                                                   focusNode: _model
                                                       .telephoneTextFieldFocusNode,
-                                                  autofocus: true,
+                                                  autofocus: false,
                                                   autofillHints: [
-                                                    AutofillHints
-                                                        .telephoneNumberCountryCode
+                                                    AutofillHints.telephoneNumber
                                                   ],
                                                   obscureText: false,
                                                   decoration: InputDecoration(
-                                                    labelText: 'Telephone',
-                                                    labelStyle: FlutterFlowTheme
-                                                            .of(context)
-                                                        .labelLarge
-                                                        .override(
-                                                          font:
-                                                              GoogleFonts.inter(
-                                                            fontWeight:
-                                                                FlutterFlowTheme.of(
+                                                    labelText: 'Téléphone',
+                                                    labelStyle:
+                                                        FlutterFlowTheme.of(
+                                                                context)
+                                                            .labelMedium
+                                                            .override(
+                                                              font: GoogleFonts
+                                                                  .inter(
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .normal,
+                                                                fontStyle: FlutterFlowTheme.of(
                                                                         context)
-                                                                    .labelLarge
-                                                                    .fontWeight,
-                                                            fontStyle:
-                                                                FlutterFlowTheme.of(
-                                                                        context)
-                                                                    .labelLarge
+                                                                    .labelMedium
                                                                     .fontStyle,
-                                                          ),
-                                                          letterSpacing: 0.0,
-                                                          fontWeight:
-                                                              FlutterFlowTheme.of(
-                                                                      context)
-                                                                  .labelLarge
-                                                                  .fontWeight,
-                                                          fontStyle:
-                                                              FlutterFlowTheme.of(
-                                                                      context)
-                                                                  .labelLarge
+                                                              ),
+                                                              color: Color(
+                                                                  0xFF677681),
+                                                              fontSize: 14.0,
+                                                              letterSpacing: 0.0,
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .normal,
+                                                              fontStyle: FlutterFlowTheme
+                                                                      .of(context)
+                                                                  .labelMedium
                                                                   .fontStyle,
-                                                        ),
-                                                    hintText:
-                                                        'Entree votre numero de telephone',
+                                                            ),
                                                     enabledBorder:
                                                         OutlineInputBorder(
                                                       borderSide: BorderSide(
                                                         color:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .alternate,
+                                                            Color(0xFFE3E7ED),
                                                         width: 2.0,
                                                       ),
                                                       borderRadius:
@@ -526,9 +469,7 @@ class _Auth3CopyWidgetState extends State<Auth3CopyWidget>
                                                         OutlineInputBorder(
                                                       borderSide: BorderSide(
                                                         color:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .primary,
+                                                            Color(0xFFF83B46),
                                                         width: 2.0,
                                                       ),
                                                       borderRadius:
@@ -539,9 +480,7 @@ class _Auth3CopyWidgetState extends State<Auth3CopyWidget>
                                                         OutlineInputBorder(
                                                       borderSide: BorderSide(
                                                         color:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .error,
+                                                            Color(0xFFFF5963),
                                                         width: 2.0,
                                                       ),
                                                       borderRadius:
@@ -552,9 +491,7 @@ class _Auth3CopyWidgetState extends State<Auth3CopyWidget>
                                                         OutlineInputBorder(
                                                       borderSide: BorderSide(
                                                         color:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .error,
+                                                            Color(0xFFFF5963),
                                                         width: 2.0,
                                                       ),
                                                       borderRadius:
@@ -562,46 +499,41 @@ class _Auth3CopyWidgetState extends State<Auth3CopyWidget>
                                                               12.0),
                                                     ),
                                                     filled: true,
-                                                    fillColor: FlutterFlowTheme
-                                                            .of(context)
-                                                        .secondaryBackground,
+                                                    fillColor: Colors.white,
                                                     contentPadding:
-                                                        EdgeInsets.all(24.0),
+                                                        EdgeInsetsDirectional
+                                                            .fromSTEB(24.0, 24.0,
+                                                                20.0, 24.0),
                                                   ),
                                                   style: FlutterFlowTheme.of(
                                                           context)
-                                                      .bodyLarge
+                                                      .bodyMedium
                                                       .override(
                                                         font: GoogleFonts.inter(
                                                           fontWeight:
-                                                              FlutterFlowTheme.of(
-                                                                      context)
-                                                                  .bodyLarge
-                                                                  .fontWeight,
+                                                              FontWeight.normal,
                                                           fontStyle:
                                                               FlutterFlowTheme.of(
                                                                       context)
-                                                                  .bodyLarge
+                                                                  .bodyMedium
                                                                   .fontStyle,
                                                         ),
+                                                        color:
+                                                            Color(0xFF14181B),
+                                                        fontSize: 14.0,
                                                         letterSpacing: 0.0,
                                                         fontWeight:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .bodyLarge
-                                                                .fontWeight,
+                                                            FontWeight.normal,
                                                         fontStyle:
                                                             FlutterFlowTheme.of(
                                                                     context)
-                                                                .bodyLarge
+                                                                .bodyMedium
                                                                 .fontStyle,
                                                       ),
                                                   keyboardType:
                                                       TextInputType.phone,
                                                   cursorColor:
-                                                      FlutterFlowTheme.of(
-                                                              context)
-                                                          .primary,
+                                                      Color(0xFFF83B46),
                                                   validator: _model
                                                       .telephoneTextFieldTextControllerValidator
                                                       .asValidator(context),
@@ -610,8 +542,7 @@ class _Auth3CopyWidgetState extends State<Auth3CopyWidget>
                                             ),
                                             Padding(
                                               padding: EdgeInsetsDirectional
-                                                  .fromSTEB(
-                                                      0.0, 0.0, 0.0, 16.0),
+                                                  .fromSTEB(0.0, 0.0, 0.0, 16.0),
                                               child: Container(
                                                 width: double.infinity,
                                                 child: TextFormField(
@@ -619,50 +550,42 @@ class _Auth3CopyWidgetState extends State<Auth3CopyWidget>
                                                       .villeTextFieldTextController,
                                                   focusNode: _model
                                                       .villeTextFieldFocusNode,
-                                                  autofocus: true,
-                                                  autofillHints: [
-                                                    AutofillHints.addressCity
-                                                  ],
+                                                  autofocus: false,
                                                   obscureText: false,
                                                   decoration: InputDecoration(
                                                     labelText: 'Ville',
-                                                    labelStyle: FlutterFlowTheme
-                                                            .of(context)
-                                                        .labelLarge
-                                                        .override(
-                                                          font:
-                                                              GoogleFonts.inter(
-                                                            fontWeight:
-                                                                FlutterFlowTheme.of(
+                                                    labelStyle:
+                                                        FlutterFlowTheme.of(
+                                                                context)
+                                                            .labelMedium
+                                                            .override(
+                                                              font: GoogleFonts
+                                                                  .inter(
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .normal,
+                                                                fontStyle: FlutterFlowTheme.of(
                                                                         context)
-                                                                    .labelLarge
-                                                                    .fontWeight,
-                                                            fontStyle:
-                                                                FlutterFlowTheme.of(
-                                                                        context)
-                                                                    .labelLarge
+                                                                    .labelMedium
                                                                     .fontStyle,
-                                                          ),
-                                                          letterSpacing: 0.0,
-                                                          fontWeight:
-                                                              FlutterFlowTheme.of(
-                                                                      context)
-                                                                  .labelLarge
-                                                                  .fontWeight,
-                                                          fontStyle:
-                                                              FlutterFlowTheme.of(
-                                                                      context)
-                                                                  .labelLarge
+                                                              ),
+                                                              color: Color(
+                                                                  0xFF677681),
+                                                              fontSize: 14.0,
+                                                              letterSpacing: 0.0,
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .normal,
+                                                              fontStyle: FlutterFlowTheme
+                                                                      .of(context)
+                                                                  .labelMedium
                                                                   .fontStyle,
-                                                        ),
-                                                    hintText: 'Votre ville',
+                                                            ),
                                                     enabledBorder:
                                                         OutlineInputBorder(
                                                       borderSide: BorderSide(
                                                         color:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .alternate,
+                                                            Color(0xFFE3E7ED),
                                                         width: 2.0,
                                                       ),
                                                       borderRadius:
@@ -673,9 +596,7 @@ class _Auth3CopyWidgetState extends State<Auth3CopyWidget>
                                                         OutlineInputBorder(
                                                       borderSide: BorderSide(
                                                         color:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .primary,
+                                                            Color(0xFFF83B46),
                                                         width: 2.0,
                                                       ),
                                                       borderRadius:
@@ -686,9 +607,7 @@ class _Auth3CopyWidgetState extends State<Auth3CopyWidget>
                                                         OutlineInputBorder(
                                                       borderSide: BorderSide(
                                                         color:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .error,
+                                                            Color(0xFFFF5963),
                                                         width: 2.0,
                                                       ),
                                                       borderRadius:
@@ -699,9 +618,7 @@ class _Auth3CopyWidgetState extends State<Auth3CopyWidget>
                                                         OutlineInputBorder(
                                                       borderSide: BorderSide(
                                                         color:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .error,
+                                                            Color(0xFFFF5963),
                                                         width: 2.0,
                                                       ),
                                                       borderRadius:
@@ -709,46 +626,39 @@ class _Auth3CopyWidgetState extends State<Auth3CopyWidget>
                                                               12.0),
                                                     ),
                                                     filled: true,
-                                                    fillColor: FlutterFlowTheme
-                                                            .of(context)
-                                                        .secondaryBackground,
+                                                    fillColor: Colors.white,
                                                     contentPadding:
-                                                        EdgeInsets.all(24.0),
+                                                        EdgeInsetsDirectional
+                                                            .fromSTEB(24.0, 24.0,
+                                                                20.0, 24.0),
                                                   ),
                                                   style: FlutterFlowTheme.of(
                                                           context)
-                                                      .bodyLarge
+                                                      .bodyMedium
                                                       .override(
                                                         font: GoogleFonts.inter(
                                                           fontWeight:
-                                                              FlutterFlowTheme.of(
-                                                                      context)
-                                                                  .bodyLarge
-                                                                  .fontWeight,
+                                                              FontWeight.normal,
                                                           fontStyle:
                                                               FlutterFlowTheme.of(
                                                                       context)
-                                                                  .bodyLarge
+                                                                  .bodyMedium
                                                                   .fontStyle,
                                                         ),
+                                                        color:
+                                                            Color(0xFF14181B),
+                                                        fontSize: 14.0,
                                                         letterSpacing: 0.0,
                                                         fontWeight:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .bodyLarge
-                                                                .fontWeight,
+                                                            FontWeight.normal,
                                                         fontStyle:
                                                             FlutterFlowTheme.of(
                                                                     context)
-                                                                .bodyLarge
+                                                                .bodyMedium
                                                                 .fontStyle,
                                                       ),
-                                                  keyboardType: TextInputType
-                                                      .streetAddress,
                                                   cursorColor:
-                                                      FlutterFlowTheme.of(
-                                                              context)
-                                                          .primary,
+                                                      Color(0xFFF83B46),
                                                   validator: _model
                                                       .villeTextFieldTextControllerValidator
                                                       .asValidator(context),
@@ -757,8 +667,7 @@ class _Auth3CopyWidgetState extends State<Auth3CopyWidget>
                                             ),
                                             Padding(
                                               padding: EdgeInsetsDirectional
-                                                  .fromSTEB(
-                                                      0.0, 0.0, 0.0, 16.0),
+                                                  .fromSTEB(0.0, 0.0, 0.0, 16.0),
                                               child: Container(
                                                 width: double.infinity,
                                                 child: TextFormField(
@@ -766,51 +675,45 @@ class _Auth3CopyWidgetState extends State<Auth3CopyWidget>
                                                       .emailTextFieldTextController,
                                                   focusNode: _model
                                                       .emailTextFieldFocusNode,
-                                                  autofocus: true,
+                                                  autofocus: false,
                                                   autofillHints: [
                                                     AutofillHints.email
                                                   ],
                                                   obscureText: false,
                                                   decoration: InputDecoration(
-                                                    labelText: 'Adresse mail',
-                                                    labelStyle: FlutterFlowTheme
-                                                            .of(context)
-                                                        .labelLarge
-                                                        .override(
-                                                          font:
-                                                              GoogleFonts.inter(
-                                                            fontWeight:
-                                                                FlutterFlowTheme.of(
+                                                    labelText: 'Email',
+                                                    labelStyle:
+                                                        FlutterFlowTheme.of(
+                                                                context)
+                                                            .labelMedium
+                                                            .override(
+                                                              font: GoogleFonts
+                                                                  .inter(
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .normal,
+                                                                fontStyle: FlutterFlowTheme.of(
                                                                         context)
-                                                                    .labelLarge
-                                                                    .fontWeight,
-                                                            fontStyle:
-                                                                FlutterFlowTheme.of(
-                                                                        context)
-                                                                    .labelLarge
+                                                                    .labelMedium
                                                                     .fontStyle,
-                                                          ),
-                                                          letterSpacing: 0.0,
-                                                          fontWeight:
-                                                              FlutterFlowTheme.of(
-                                                                      context)
-                                                                  .labelLarge
-                                                                  .fontWeight,
-                                                          fontStyle:
-                                                              FlutterFlowTheme.of(
-                                                                      context)
-                                                                  .labelLarge
+                                                              ),
+                                                              color: Color(
+                                                                  0xFF677681),
+                                                              fontSize: 14.0,
+                                                              letterSpacing: 0.0,
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .normal,
+                                                              fontStyle: FlutterFlowTheme
+                                                                      .of(context)
+                                                                  .labelMedium
                                                                   .fontStyle,
-                                                        ),
-                                                    hintText:
-                                                        'Entree votre adresse mail',
+                                                            ),
                                                     enabledBorder:
                                                         OutlineInputBorder(
                                                       borderSide: BorderSide(
                                                         color:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .alternate,
+                                                            Color(0xFFE3E7ED),
                                                         width: 2.0,
                                                       ),
                                                       borderRadius:
@@ -821,9 +724,7 @@ class _Auth3CopyWidgetState extends State<Auth3CopyWidget>
                                                         OutlineInputBorder(
                                                       borderSide: BorderSide(
                                                         color:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .primary,
+                                                            Color(0xFFF83B46),
                                                         width: 2.0,
                                                       ),
                                                       borderRadius:
@@ -834,9 +735,7 @@ class _Auth3CopyWidgetState extends State<Auth3CopyWidget>
                                                         OutlineInputBorder(
                                                       borderSide: BorderSide(
                                                         color:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .error,
+                                                            Color(0xFFFF5963),
                                                         width: 2.0,
                                                       ),
                                                       borderRadius:
@@ -847,9 +746,7 @@ class _Auth3CopyWidgetState extends State<Auth3CopyWidget>
                                                         OutlineInputBorder(
                                                       borderSide: BorderSide(
                                                         color:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .error,
+                                                            Color(0xFFFF5963),
                                                         width: 2.0,
                                                       ),
                                                       borderRadius:
@@ -857,46 +754,41 @@ class _Auth3CopyWidgetState extends State<Auth3CopyWidget>
                                                               12.0),
                                                     ),
                                                     filled: true,
-                                                    fillColor: FlutterFlowTheme
-                                                            .of(context)
-                                                        .secondaryBackground,
+                                                    fillColor: Colors.white,
                                                     contentPadding:
-                                                        EdgeInsets.all(24.0),
+                                                        EdgeInsetsDirectional
+                                                            .fromSTEB(24.0, 24.0,
+                                                                20.0, 24.0),
                                                   ),
                                                   style: FlutterFlowTheme.of(
                                                           context)
-                                                      .bodyLarge
+                                                      .bodyMedium
                                                       .override(
                                                         font: GoogleFonts.inter(
                                                           fontWeight:
-                                                              FlutterFlowTheme.of(
-                                                                      context)
-                                                                  .bodyLarge
-                                                                  .fontWeight,
+                                                              FontWeight.normal,
                                                           fontStyle:
                                                               FlutterFlowTheme.of(
                                                                       context)
-                                                                  .bodyLarge
+                                                                  .bodyMedium
                                                                   .fontStyle,
                                                         ),
+                                                        color:
+                                                            Color(0xFF14181B),
+                                                        fontSize: 14.0,
                                                         letterSpacing: 0.0,
                                                         fontWeight:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .bodyLarge
-                                                                .fontWeight,
+                                                            FontWeight.normal,
                                                         fontStyle:
                                                             FlutterFlowTheme.of(
                                                                     context)
-                                                                .bodyLarge
+                                                                .bodyMedium
                                                                 .fontStyle,
                                                       ),
                                                   keyboardType: TextInputType
                                                       .emailAddress,
                                                   cursorColor:
-                                                      FlutterFlowTheme.of(
-                                                              context)
-                                                          .primary,
+                                                      Color(0xFFF83B46),
                                                   validator: _model
                                                       .emailTextFieldTextControllerValidator
                                                       .asValidator(context),
@@ -905,8 +797,7 @@ class _Auth3CopyWidgetState extends State<Auth3CopyWidget>
                                             ),
                                             Padding(
                                               padding: EdgeInsetsDirectional
-                                                  .fromSTEB(
-                                                      0.0, 0.0, 0.0, 16.0),
+                                                  .fromSTEB(0.0, 0.0, 0.0, 16.0),
                                               child: Container(
                                                 width: double.infinity,
                                                 child: TextFormField(
@@ -914,7 +805,7 @@ class _Auth3CopyWidgetState extends State<Auth3CopyWidget>
                                                       .passwordTextFieldTextController,
                                                   focusNode: _model
                                                       .passwordTextFieldFocusNode,
-                                                  autofocus: true,
+                                                  autofocus: false,
                                                   autofillHints: [
                                                     AutofillHints.password
                                                   ],
@@ -922,44 +813,38 @@ class _Auth3CopyWidgetState extends State<Auth3CopyWidget>
                                                       .passwordTextFieldVisibility,
                                                   decoration: InputDecoration(
                                                     labelText: 'Mot de passe',
-                                                    labelStyle: FlutterFlowTheme
-                                                            .of(context)
-                                                        .labelLarge
-                                                        .override(
-                                                          font:
-                                                              GoogleFonts.inter(
-                                                            fontWeight:
-                                                                FlutterFlowTheme.of(
+                                                    labelStyle:
+                                                        FlutterFlowTheme.of(
+                                                                context)
+                                                            .labelMedium
+                                                            .override(
+                                                              font: GoogleFonts
+                                                                  .inter(
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .normal,
+                                                                fontStyle: FlutterFlowTheme.of(
                                                                         context)
-                                                                    .labelLarge
-                                                                    .fontWeight,
-                                                            fontStyle:
-                                                                FlutterFlowTheme.of(
-                                                                        context)
-                                                                    .labelLarge
+                                                                    .labelMedium
                                                                     .fontStyle,
-                                                          ),
-                                                          letterSpacing: 0.0,
-                                                          fontWeight:
-                                                              FlutterFlowTheme.of(
-                                                                      context)
-                                                                  .labelLarge
-                                                                  .fontWeight,
-                                                          fontStyle:
-                                                              FlutterFlowTheme.of(
-                                                                      context)
-                                                                  .labelLarge
+                                                              ),
+                                                              color: Color(
+                                                                  0xFF677681),
+                                                              fontSize: 14.0,
+                                                              letterSpacing: 0.0,
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .normal,
+                                                              fontStyle: FlutterFlowTheme
+                                                                      .of(context)
+                                                                  .labelMedium
                                                                   .fontStyle,
-                                                        ),
-                                                    hintText:
-                                                        'Entree votre mot de passe',
+                                                            ),
                                                     enabledBorder:
                                                         OutlineInputBorder(
                                                       borderSide: BorderSide(
                                                         color:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .alternate,
+                                                            Color(0xFFE3E7ED),
                                                         width: 2.0,
                                                       ),
                                                       borderRadius:
@@ -970,9 +855,7 @@ class _Auth3CopyWidgetState extends State<Auth3CopyWidget>
                                                         OutlineInputBorder(
                                                       borderSide: BorderSide(
                                                         color:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .primary,
+                                                            Color(0xFFF83B46),
                                                         width: 2.0,
                                                       ),
                                                       borderRadius:
@@ -983,9 +866,7 @@ class _Auth3CopyWidgetState extends State<Auth3CopyWidget>
                                                         OutlineInputBorder(
                                                       borderSide: BorderSide(
                                                         color:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .error,
+                                                            Color(0xFFFF5963),
                                                         width: 2.0,
                                                       ),
                                                       borderRadius:
@@ -996,9 +877,7 @@ class _Auth3CopyWidgetState extends State<Auth3CopyWidget>
                                                         OutlineInputBorder(
                                                       borderSide: BorderSide(
                                                         color:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .error,
+                                                            Color(0xFFFF5963),
                                                         width: 2.0,
                                                       ),
                                                       borderRadius:
@@ -1006,11 +885,11 @@ class _Auth3CopyWidgetState extends State<Auth3CopyWidget>
                                                               12.0),
                                                     ),
                                                     filled: true,
-                                                    fillColor: FlutterFlowTheme
-                                                            .of(context)
-                                                        .secondaryBackground,
+                                                    fillColor: Colors.white,
                                                     contentPadding:
-                                                        EdgeInsets.all(24.0),
+                                                        EdgeInsetsDirectional
+                                                            .fromSTEB(24.0, 24.0,
+                                                                20.0, 24.0),
                                                     suffixIcon: InkWell(
                                                       onTap: () => safeSetState(
                                                         () => _model
@@ -1027,45 +906,38 @@ class _Auth3CopyWidgetState extends State<Auth3CopyWidget>
                                                             : Icons
                                                                 .visibility_off_outlined,
                                                         color:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .secondaryText,
+                                                            Color(0xFF677681),
                                                         size: 24.0,
                                                       ),
                                                     ),
                                                   ),
                                                   style: FlutterFlowTheme.of(
                                                           context)
-                                                      .bodyLarge
+                                                      .bodyMedium
                                                       .override(
                                                         font: GoogleFonts.inter(
                                                           fontWeight:
-                                                              FlutterFlowTheme.of(
-                                                                      context)
-                                                                  .bodyLarge
-                                                                  .fontWeight,
+                                                              FontWeight.normal,
                                                           fontStyle:
                                                               FlutterFlowTheme.of(
                                                                       context)
-                                                                  .bodyLarge
+                                                                  .bodyMedium
                                                                   .fontStyle,
                                                         ),
+                                                        color:
+                                                            Color(0xFF14181B),
+                                                        fontSize: 14.0,
                                                         letterSpacing: 0.0,
                                                         fontWeight:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .bodyLarge
-                                                                .fontWeight,
+                                                            FontWeight.normal,
                                                         fontStyle:
                                                             FlutterFlowTheme.of(
                                                                     context)
-                                                                .bodyLarge
+                                                                .bodyMedium
                                                                 .fontStyle,
                                                       ),
                                                   cursorColor:
-                                                      FlutterFlowTheme.of(
-                                                              context)
-                                                          .primary,
+                                                      Color(0xFFF83B46),
                                                   validator: _model
                                                       .passwordTextFieldTextControllerValidator
                                                       .asValidator(context),
@@ -1074,8 +946,7 @@ class _Auth3CopyWidgetState extends State<Auth3CopyWidget>
                                             ),
                                             Padding(
                                               padding: EdgeInsetsDirectional
-                                                  .fromSTEB(
-                                                      0.0, 0.0, 0.0, 16.0),
+                                                  .fromSTEB(0.0, 0.0, 0.0, 16.0),
                                               child: Container(
                                                 width: double.infinity,
                                                 child: TextFormField(
@@ -1083,7 +954,7 @@ class _Auth3CopyWidgetState extends State<Auth3CopyWidget>
                                                       .confirmPasswordTextFieldTextController,
                                                   focusNode: _model
                                                       .confirmPasswordTextFieldFocusNode,
-                                                  autofocus: true,
+                                                  autofocus: false,
                                                   autofillHints: [
                                                     AutofillHints.password
                                                   ],
@@ -1091,45 +962,39 @@ class _Auth3CopyWidgetState extends State<Auth3CopyWidget>
                                                       .confirmPasswordTextFieldVisibility,
                                                   decoration: InputDecoration(
                                                     labelText:
-                                                        'Confirmer Mot de passe',
-                                                    labelStyle: FlutterFlowTheme
-                                                            .of(context)
-                                                        .labelLarge
-                                                        .override(
-                                                          font:
-                                                              GoogleFonts.inter(
-                                                            fontWeight:
-                                                                FlutterFlowTheme.of(
+                                                        'Confirmer le mot de passe',
+                                                    labelStyle:
+                                                        FlutterFlowTheme.of(
+                                                                context)
+                                                            .labelMedium
+                                                            .override(
+                                                              font: GoogleFonts
+                                                                  .inter(
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .normal,
+                                                                fontStyle: FlutterFlowTheme.of(
                                                                         context)
-                                                                    .labelLarge
-                                                                    .fontWeight,
-                                                            fontStyle:
-                                                                FlutterFlowTheme.of(
-                                                                        context)
-                                                                    .labelLarge
+                                                                    .labelMedium
                                                                     .fontStyle,
-                                                          ),
-                                                          letterSpacing: 0.0,
-                                                          fontWeight:
-                                                              FlutterFlowTheme.of(
-                                                                      context)
-                                                                  .labelLarge
-                                                                  .fontWeight,
-                                                          fontStyle:
-                                                              FlutterFlowTheme.of(
-                                                                      context)
-                                                                  .labelLarge
+                                                              ),
+                                                              color: Color(
+                                                                  0xFF677681),
+                                                              fontSize: 14.0,
+                                                              letterSpacing: 0.0,
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .normal,
+                                                              fontStyle: FlutterFlowTheme
+                                                                      .of(context)
+                                                                  .labelMedium
                                                                   .fontStyle,
-                                                        ),
-                                                    hintText:
-                                                        'confirmer votre motre de passe',
+                                                            ),
                                                     enabledBorder:
                                                         OutlineInputBorder(
                                                       borderSide: BorderSide(
                                                         color:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .alternate,
+                                                            Color(0xFFE3E7ED),
                                                         width: 2.0,
                                                       ),
                                                       borderRadius:
@@ -1140,9 +1005,7 @@ class _Auth3CopyWidgetState extends State<Auth3CopyWidget>
                                                         OutlineInputBorder(
                                                       borderSide: BorderSide(
                                                         color:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .primary,
+                                                            Color(0xFFF83B46),
                                                         width: 2.0,
                                                       ),
                                                       borderRadius:
@@ -1153,9 +1016,7 @@ class _Auth3CopyWidgetState extends State<Auth3CopyWidget>
                                                         OutlineInputBorder(
                                                       borderSide: BorderSide(
                                                         color:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .error,
+                                                            Color(0xFFFF5963),
                                                         width: 2.0,
                                                       ),
                                                       borderRadius:
@@ -1166,9 +1027,7 @@ class _Auth3CopyWidgetState extends State<Auth3CopyWidget>
                                                         OutlineInputBorder(
                                                       borderSide: BorderSide(
                                                         color:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .error,
+                                                            Color(0xFFFF5963),
                                                         width: 2.0,
                                                       ),
                                                       borderRadius:
@@ -1176,11 +1035,11 @@ class _Auth3CopyWidgetState extends State<Auth3CopyWidget>
                                                               12.0),
                                                     ),
                                                     filled: true,
-                                                    fillColor: FlutterFlowTheme
-                                                            .of(context)
-                                                        .secondaryBackground,
+                                                    fillColor: Colors.white,
                                                     contentPadding:
-                                                        EdgeInsets.all(24.0),
+                                                        EdgeInsetsDirectional
+                                                            .fromSTEB(24.0, 24.0,
+                                                                20.0, 24.0),
                                                     suffixIcon: InkWell(
                                                       onTap: () => safeSetState(
                                                         () => _model
@@ -1197,45 +1056,38 @@ class _Auth3CopyWidgetState extends State<Auth3CopyWidget>
                                                             : Icons
                                                                 .visibility_off_outlined,
                                                         color:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .secondaryText,
+                                                            Color(0xFF677681),
                                                         size: 24.0,
                                                       ),
                                                     ),
                                                   ),
                                                   style: FlutterFlowTheme.of(
                                                           context)
-                                                      .bodyLarge
+                                                      .bodyMedium
                                                       .override(
                                                         font: GoogleFonts.inter(
                                                           fontWeight:
-                                                              FlutterFlowTheme.of(
-                                                                      context)
-                                                                  .bodyLarge
-                                                                  .fontWeight,
+                                                              FontWeight.normal,
                                                           fontStyle:
                                                               FlutterFlowTheme.of(
                                                                       context)
-                                                                  .bodyLarge
+                                                                  .bodyMedium
                                                                   .fontStyle,
                                                         ),
+                                                        color:
+                                                            Color(0xFF14181B),
+                                                        fontSize: 14.0,
                                                         letterSpacing: 0.0,
                                                         fontWeight:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .bodyLarge
-                                                                .fontWeight,
+                                                            FontWeight.normal,
                                                         fontStyle:
                                                             FlutterFlowTheme.of(
                                                                     context)
-                                                                .bodyLarge
+                                                                .bodyMedium
                                                                 .fontStyle,
                                                       ),
                                                   cursorColor:
-                                                      FlutterFlowTheme.of(
-                                                              context)
-                                                          .primary,
+                                                      Color(0xFFF83B46),
                                                   validator: _model
                                                       .confirmPasswordTextFieldTextControllerValidator
                                                       .asValidator(context),
@@ -1243,144 +1095,97 @@ class _Auth3CopyWidgetState extends State<Auth3CopyWidget>
                                               ),
                                             ),
                                             Align(
-                                              alignment: AlignmentDirectional(
-                                                  0.0, 0.0),
+                                              alignment:
+                                                  AlignmentDirectional(0.0, 0.0),
                                               child: Padding(
                                                 padding: EdgeInsetsDirectional
                                                     .fromSTEB(
                                                         0.0, 0.0, 0.0, 16.0),
                                                 child: FFButtonWidget(
                                                   onPressed: () async {
-                                                    if (_model
-                                                            .passwordTextFieldTextController
-                                                            .text ==
-                                                        _model
-                                                            .confirmPasswordTextFieldTextController
-                                                            .text) {
-                                                      GoRouter.of(context)
-                                                          .prepareAuthEvent();
-                                                      if (_model
-                                                              .passwordTextFieldTextController
-                                                              .text !=
-                                                          _model
-                                                              .confirmPasswordTextFieldTextController
-                                                              .text) {
-                                                        ScaffoldMessenger.of(
-                                                                context)
-                                                            .showSnackBar(
-                                                          SnackBar(
-                                                            content: Text(
-                                                              'Passwords don\'t match!',
-                                                            ),
-                                                          ),
-                                                        );
-                                                        return;
-                                                      }
-
-                                                      final user = await authManager
-                                                          .createAccountWithEmail(
-                                                        context,
-                                                        _model
-                                                            .emailTextFieldTextController
-                                                            .text,
-                                                        _model
-                                                            .passwordTextFieldTextController
-                                                            .text,
+                                                    // Validate form
+                                                    if (_model.nomTextFieldTextController.text.isEmpty ||
+                                                        _model.telephoneTextFieldTextController.text.isEmpty ||
+                                                        _model.villeTextFieldTextController.text.isEmpty ||
+                                                        _model.emailTextFieldTextController.text.isEmpty ||
+                                                        _model.passwordTextFieldTextController.text.isEmpty ||
+                                                        _model.confirmPasswordTextFieldTextController.text.isEmpty) {
+                                                      ScaffoldMessenger.of(context).showSnackBar(
+                                                        SnackBar(content: Text('Veuillez remplir tous les champs')),
                                                       );
-                                                      if (user == null) {
-                                                        return;
-                                                      }
+                                                      return;
+                                                    }
 
-                                                      await ProfilesTable()
-                                                          .insert({
+                                                    if (_model.passwordTextFieldTextController.text !=
+                                                        _model.confirmPasswordTextFieldTextController.text) {
+                                                      ScaffoldMessenger.of(context).showSnackBar(
+                                                        SnackBar(content: Text('Les mots de passe ne correspondent pas')),
+                                                      );
+                                                      return;
+                                                    }
+
+                                                    final user = await authManager.createAccountWithEmail(
+                                                      context,
+                                                      _model.emailTextFieldTextController.text,
+                                                      _model.passwordTextFieldTextController.text,
+                                                    );
+
+                                                    if (user != null) {
+                                                      // Create profile
+                                                      await ProfilesTable().insert({
                                                         'id': currentUserUid,
-                                                        'full_name': _model
-                                                            .nomTextFieldTextController
-                                                            .text,
-                                                        'phone': _model
-                                                            .telephoneTextFieldTextController
-                                                            .text,
-                                                        'role': widget!.role,
+                                                        'full_name': _model.nomTextFieldTextController.text,
+                                                        'email': _model.emailTextFieldTextController.text,
+                                                        'phone': _model.telephoneTextFieldTextController.text,
+                                                        'role': widget.role,
+                                                        'is_active': true,
                                                       });
-                                                      if (widget!.role ==
-                                                          'prestataire') {
-                                                        context.pushNamedAuth(
-                                                            PrestataireHomePageWidget
-                                                                .routeName,
-                                                            context.mounted);
-                                                      } else {
-                                                        context.pushNamedAuth(
-                                                            CustomerhomepageWidget
-                                                                .routeName,
-                                                            context.mounted);
-                                                      }
-                                                    } else {
-                                                      ScaffoldMessenger.of(
-                                                              context)
-                                                          .showSnackBar(
-                                                        SnackBar(
-                                                          content: Text(
-                                                            'Les mots de passe ne correspondent pas',
-                                                            style: TextStyle(
-                                                              color: FlutterFlowTheme
-                                                                      .of(context)
-                                                                  .primaryText,
-                                                            ),
-                                                          ),
-                                                          duration: Duration(
-                                                              milliseconds:
-                                                                  4000),
-                                                          backgroundColor:
-                                                              FlutterFlowTheme.of(
-                                                                      context)
-                                                                  .secondary,
-                                                        ),
+
+                                                      context.pushNamedAuth(
+                                                        PrestataireHomePageWidget.routeName,
+                                                        context.mounted,
                                                       );
                                                     }
                                                   },
-                                                  text: 'Créer mon compte',
+                                                  text: 'Créer un compte',
                                                   options: FFButtonOptions(
-                                                    width: 230.0,
-                                                    height: 52.0,
+                                                    width: double.infinity,
+                                                    height: 44.0,
                                                     padding:
                                                         EdgeInsetsDirectional
-                                                            .fromSTEB(0.0, 0.0,
-                                                                0.0, 0.0),
+                                                            .fromSTEB(24.0, 0.0,
+                                                                24.0, 0.0),
                                                     iconPadding:
                                                         EdgeInsetsDirectional
                                                             .fromSTEB(0.0, 0.0,
                                                                 0.0, 0.0),
-                                                    color: Color(0xFFF50488),
-                                                    textStyle: FlutterFlowTheme
-                                                            .of(context)
-                                                        .titleSmall
-                                                        .override(
-                                                          font: GoogleFonts
-                                                              .interTight(
-                                                            fontWeight:
-                                                                FlutterFlowTheme.of(
-                                                                        context)
-                                                                    .titleSmall
-                                                                    .fontWeight,
-                                                            fontStyle:
-                                                                FlutterFlowTheme.of(
+                                                    color: Color(0xFFF83B46),
+                                                    textStyle:
+                                                        FlutterFlowTheme.of(
+                                                                context)
+                                                            .titleSmall
+                                                            .override(
+                                                              font: GoogleFonts
+                                                                  .inter(
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .w600,
+                                                                fontStyle: FlutterFlowTheme.of(
                                                                         context)
                                                                     .titleSmall
                                                                     .fontStyle,
-                                                          ),
-                                                          color: Colors.white,
-                                                          letterSpacing: 0.0,
-                                                          fontWeight:
-                                                              FlutterFlowTheme.of(
-                                                                      context)
-                                                                  .titleSmall
-                                                                  .fontWeight,
-                                                          fontStyle:
-                                                              FlutterFlowTheme.of(
-                                                                      context)
+                                                              ),
+                                                              color:
+                                                                  Colors.white,
+                                                              fontSize: 16.0,
+                                                              letterSpacing: 0.0,
+                                                              fontWeight:
+                                                                  FontWeight.w600,
+                                                              fontStyle: FlutterFlowTheme
+                                                                      .of(context)
                                                                   .titleSmall
                                                                   .fontStyle,
-                                                        ),
+                                                            ),
                                                     elevation: 3.0,
                                                     borderSide: BorderSide(
                                                       color: Colors.transparent,
@@ -1393,231 +1198,12 @@ class _Auth3CopyWidgetState extends State<Auth3CopyWidget>
                                                 ),
                                               ),
                                             ),
-                                            Column(
-                                              mainAxisSize: MainAxisSize.max,
-                                              children: [
-                                                Align(
-                                                  alignment:
-                                                      AlignmentDirectional(
-                                                          0.0, 0.0),
-                                                  child: Padding(
-                                                    padding:
-                                                        EdgeInsetsDirectional
-                                                            .fromSTEB(16.0, 0.0,
-                                                                16.0, 24.0),
-                                                    child: Text(
-                                                      'Déjà un compte ?Se connecter',
-                                                      textAlign:
-                                                          TextAlign.center,
-                                                      style:
-                                                          FlutterFlowTheme.of(
-                                                                  context)
-                                                              .labelMedium
-                                                              .override(
-                                                                font:
-                                                                    GoogleFonts
-                                                                        .inter(
-                                                                  fontWeight: FlutterFlowTheme.of(
-                                                                          context)
-                                                                      .labelMedium
-                                                                      .fontWeight,
-                                                                  fontStyle: FlutterFlowTheme.of(
-                                                                          context)
-                                                                      .labelMedium
-                                                                      .fontStyle,
-                                                                ),
-                                                                color: Color(
-                                                                    0xFFFF008B),
-                                                                letterSpacing:
-                                                                    0.0,
-                                                                fontWeight: FlutterFlowTheme.of(
-                                                                        context)
-                                                                    .labelMedium
-                                                                    .fontWeight,
-                                                                fontStyle: FlutterFlowTheme.of(
-                                                                        context)
-                                                                    .labelMedium
-                                                                    .fontStyle,
-                                                              ),
-                                                    ),
-                                                  ),
-                                                ),
-                                                Align(
-                                                  alignment:
-                                                      AlignmentDirectional(
-                                                          0.0, 0.0),
-                                                  child: Padding(
-                                                    padding:
-                                                        EdgeInsetsDirectional
-                                                            .fromSTEB(0.0, 0.0,
-                                                                0.0, 16.0),
-                                                    child: Wrap(
-                                                      spacing: 16.0,
-                                                      runSpacing: 0.0,
-                                                      alignment:
-                                                          WrapAlignment.center,
-                                                      crossAxisAlignment:
-                                                          WrapCrossAlignment
-                                                              .center,
-                                                      direction:
-                                                          Axis.horizontal,
-                                                      runAlignment:
-                                                          WrapAlignment.center,
-                                                      verticalDirection:
-                                                          VerticalDirection
-                                                              .down,
-                                                      clipBehavior: Clip.none,
-                                                      children: [
-                                                        Padding(
-                                                          padding:
-                                                              EdgeInsetsDirectional
-                                                                  .fromSTEB(
-                                                                      0.0,
-                                                                      0.0,
-                                                                      0.0,
-                                                                      16.0),
-                                                          child: FFButtonWidget(
-                                                            onPressed:
-                                                                () async {
-                                                              GoRouter.of(
-                                                                      context)
-                                                                  .prepareAuthEvent();
-                                                              if (_model
-                                                                      .passwordTextFieldTextController
-                                                                      .text !=
-                                                                  _model
-                                                                      .confirmPasswordTextFieldTextController
-                                                                      .text) {
-                                                                ScaffoldMessenger.of(
-                                                                        context)
-                                                                    .showSnackBar(
-                                                                  SnackBar(
-                                                                    content:
-                                                                        Text(
-                                                                      'Passwords don\'t match!',
-                                                                    ),
-                                                                  ),
-                                                                );
-                                                                return;
-                                                              }
-
-                                                              final user =
-                                                                  await authManager
-                                                                      .createAccountWithEmail(
-                                                                context,
-                                                                _model
-                                                                    .emailTextFieldTextController
-                                                                    .text,
-                                                                _model
-                                                                    .passwordTextFieldTextController
-                                                                    .text,
-                                                              );
-                                                              if (user ==
-                                                                  null) {
-                                                                return;
-                                                              }
-
-                                                              await ProfilesTable()
-                                                                  .update(
-                                                                data: {
-                                                                  'id':
-                                                                      currentUserUid,
-                                                                  'email':
-                                                                      currentUserEmail,
-                                                                  'role':
-                                                                      'prestataire',
-                                                                },
-                                                                matchingRows:
-                                                                    (rows) =>
-                                                                        rows,
-                                                              );
-
-                                                              context.pushNamedAuth(
-                                                                  PrestataireHomePageWidget
-                                                                      .routeName,
-                                                                  context
-                                                                      .mounted);
-                                                            },
-                                                            text:
-                                                                'Continue with Google',
-                                                            icon: FaIcon(
-                                                              FontAwesomeIcons
-                                                                  .google,
-                                                              size: 20.0,
-                                                            ),
-                                                            options:
-                                                                FFButtonOptions(
-                                                              width: 230.0,
-                                                              height: 44.0,
-                                                              padding:
-                                                                  EdgeInsetsDirectional
-                                                                      .fromSTEB(
-                                                                          0.0,
-                                                                          0.0,
-                                                                          0.0,
-                                                                          0.0),
-                                                              iconPadding:
-                                                                  EdgeInsetsDirectional
-                                                                      .fromSTEB(
-                                                                          0.0,
-                                                                          0.0,
-                                                                          0.0,
-                                                                          0.0),
-                                                              color: FlutterFlowTheme
-                                                                      .of(context)
-                                                                  .secondaryBackground,
-                                                              textStyle:
-                                                                  FlutterFlowTheme.of(
-                                                                          context)
-                                                                      .bodyMedium
-                                                                      .override(
-                                                                        font: GoogleFonts
-                                                                            .inter(
-                                                                          fontWeight:
-                                                                              FontWeight.bold,
-                                                                          fontStyle: FlutterFlowTheme.of(context)
-                                                                              .bodyMedium
-                                                                              .fontStyle,
-                                                                        ),
-                                                                        letterSpacing:
-                                                                            0.0,
-                                                                        fontWeight:
-                                                                            FontWeight.bold,
-                                                                        fontStyle: FlutterFlowTheme.of(context)
-                                                                            .bodyMedium
-                                                                            .fontStyle,
-                                                                      ),
-                                                              elevation: 0.0,
-                                                              borderSide:
-                                                                  BorderSide(
-                                                                color: FlutterFlowTheme.of(
-                                                                        context)
-                                                                    .alternate,
-                                                                width: 2.0,
-                                                              ),
-                                                              borderRadius:
-                                                                  BorderRadius
-                                                                      .circular(
-                                                                          12.0),
-                                                              hoverColor:
-                                                                  FlutterFlowTheme.of(
-                                                                          context)
-                                                                      .primaryBackground,
-                                                            ),
-                                                          ),
-                                                        ),
-                                                      ],
-                                                    ),
-                                                  ),
-                                                ),
-                                              ],
-                                            ),
                                           ],
                                         ),
-                                      ).animateOnPageLoad(animationsMap[
-                                          'columnOnPageLoadAnimation1']!),
+                                      ),
                                     ),
                                   ),
+                                  // Sign In Tab
                                   Align(
                                     alignment: AlignmentDirectional(0.0, -1.0),
                                     child: Padding(
@@ -1629,46 +1215,24 @@ class _Auth3CopyWidgetState extends State<Auth3CopyWidget>
                                           crossAxisAlignment:
                                               CrossAxisAlignment.start,
                                           children: [
-                                            if (responsiveVisibility(
-                                              context: context,
-                                              phone: false,
-                                              tablet: false,
-                                            ))
-                                              Container(
-                                                width: 230.0,
-                                                height: 16.0,
-                                                decoration: BoxDecoration(
-                                                  color: FlutterFlowTheme.of(
-                                                          context)
-                                                      .secondaryBackground,
-                                                ),
-                                              ),
                                             Text(
-                                              'Bienvenue',
+                                              'Se connecter',
                                               textAlign: TextAlign.start,
-                                              style: FlutterFlowTheme.of(
-                                                      context)
+                                              style: FlutterFlowTheme.of(context)
                                                   .headlineMedium
                                                   .override(
-                                                    font:
-                                                        GoogleFonts.interTight(
-                                                      fontWeight:
-                                                          FlutterFlowTheme.of(
-                                                                  context)
-                                                              .headlineMedium
-                                                              .fontWeight,
+                                                    font: GoogleFonts.sora(
+                                                      fontWeight: FontWeight.bold,
                                                       fontStyle:
                                                           FlutterFlowTheme.of(
                                                                   context)
                                                               .headlineMedium
                                                               .fontStyle,
                                                     ),
+                                                    color: Color(0xFF14181B),
+                                                    fontSize: 32.0,
                                                     letterSpacing: 0.0,
-                                                    fontWeight:
-                                                        FlutterFlowTheme.of(
-                                                                context)
-                                                            .headlineMedium
-                                                            .fontWeight,
+                                                    fontWeight: FontWeight.bold,
                                                     fontStyle:
                                                         FlutterFlowTheme.of(
                                                                 context)
@@ -1678,46 +1242,39 @@ class _Auth3CopyWidgetState extends State<Auth3CopyWidget>
                                             ),
                                             Padding(
                                               padding: EdgeInsetsDirectional
-                                                  .fromSTEB(
-                                                      0.0, 4.0, 0.0, 24.0),
+                                                  .fromSTEB(0.0, 4.0, 0.0, 24.0),
                                               child: Text(
-                                                'Connectez-vous à votre compte',
+                                                'Connectez-vous à votre compte prestataire',
                                                 textAlign: TextAlign.start,
-                                                style:
-                                                    FlutterFlowTheme.of(context)
-                                                        .labelMedium
-                                                        .override(
-                                                          font:
-                                                              GoogleFonts.inter(
-                                                            fontWeight:
-                                                                FlutterFlowTheme.of(
-                                                                        context)
-                                                                    .labelMedium
-                                                                    .fontWeight,
-                                                            fontStyle:
-                                                                FlutterFlowTheme.of(
-                                                                        context)
-                                                                    .labelMedium
-                                                                    .fontStyle,
-                                                          ),
-                                                          letterSpacing: 0.0,
-                                                          fontWeight:
-                                                              FlutterFlowTheme.of(
-                                                                      context)
-                                                                  .labelMedium
-                                                                  .fontWeight,
-                                                          fontStyle:
-                                                              FlutterFlowTheme.of(
-                                                                      context)
-                                                                  .labelMedium
-                                                                  .fontStyle,
-                                                        ),
+                                                style: FlutterFlowTheme.of(
+                                                        context)
+                                                    .labelMedium
+                                                    .override(
+                                                      font: GoogleFonts.inter(
+                                                        fontWeight:
+                                                            FontWeight.normal,
+                                                        fontStyle:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .labelMedium
+                                                                .fontStyle,
+                                                      ),
+                                                      color: Color(0xFF677681),
+                                                      fontSize: 14.0,
+                                                      letterSpacing: 0.0,
+                                                      fontWeight:
+                                                          FontWeight.normal,
+                                                      fontStyle:
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .labelMedium
+                                                              .fontStyle,
+                                                    ),
                                               ),
                                             ),
                                             Padding(
                                               padding: EdgeInsetsDirectional
-                                                  .fromSTEB(
-                                                      0.0, 0.0, 0.0, 16.0),
+                                                  .fromSTEB(0.0, 0.0, 0.0, 16.0),
                                               child: Container(
                                                 width: double.infinity,
                                                 child: TextFormField(
@@ -1725,49 +1282,45 @@ class _Auth3CopyWidgetState extends State<Auth3CopyWidget>
                                                       .emailAddressTextController,
                                                   focusNode: _model
                                                       .emailAddressFocusNode,
-                                                  autofocus: true,
+                                                  autofocus: false,
                                                   autofillHints: [
                                                     AutofillHints.email
                                                   ],
                                                   obscureText: false,
                                                   decoration: InputDecoration(
                                                     labelText: 'Email',
-                                                    labelStyle: FlutterFlowTheme
-                                                            .of(context)
-                                                        .labelLarge
-                                                        .override(
-                                                          font:
-                                                              GoogleFonts.inter(
-                                                            fontWeight:
-                                                                FlutterFlowTheme.of(
+                                                    labelStyle:
+                                                        FlutterFlowTheme.of(
+                                                                context)
+                                                            .labelMedium
+                                                            .override(
+                                                              font: GoogleFonts
+                                                                  .inter(
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .normal,
+                                                                fontStyle: FlutterFlowTheme.of(
                                                                         context)
-                                                                    .labelLarge
-                                                                    .fontWeight,
-                                                            fontStyle:
-                                                                FlutterFlowTheme.of(
-                                                                        context)
-                                                                    .labelLarge
+                                                                    .labelMedium
                                                                     .fontStyle,
-                                                          ),
-                                                          letterSpacing: 0.0,
-                                                          fontWeight:
-                                                              FlutterFlowTheme.of(
-                                                                      context)
-                                                                  .labelLarge
-                                                                  .fontWeight,
-                                                          fontStyle:
-                                                              FlutterFlowTheme.of(
-                                                                      context)
-                                                                  .labelLarge
+                                                              ),
+                                                              color: Color(
+                                                                  0xFF677681),
+                                                              fontSize: 14.0,
+                                                              letterSpacing: 0.0,
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .normal,
+                                                              fontStyle: FlutterFlowTheme
+                                                                      .of(context)
+                                                                  .labelMedium
                                                                   .fontStyle,
-                                                        ),
+                                                            ),
                                                     enabledBorder:
                                                         OutlineInputBorder(
                                                       borderSide: BorderSide(
                                                         color:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .alternate,
+                                                            Color(0xFFE3E7ED),
                                                         width: 2.0,
                                                       ),
                                                       borderRadius:
@@ -1778,9 +1331,7 @@ class _Auth3CopyWidgetState extends State<Auth3CopyWidget>
                                                         OutlineInputBorder(
                                                       borderSide: BorderSide(
                                                         color:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .primary,
+                                                            Color(0xFFF83B46),
                                                         width: 2.0,
                                                       ),
                                                       borderRadius:
@@ -1791,9 +1342,7 @@ class _Auth3CopyWidgetState extends State<Auth3CopyWidget>
                                                         OutlineInputBorder(
                                                       borderSide: BorderSide(
                                                         color:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .alternate,
+                                                            Color(0xFFFF5963),
                                                         width: 2.0,
                                                       ),
                                                       borderRadius:
@@ -1804,9 +1353,7 @@ class _Auth3CopyWidgetState extends State<Auth3CopyWidget>
                                                         OutlineInputBorder(
                                                       borderSide: BorderSide(
                                                         color:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .alternate,
+                                                            Color(0xFFFF5963),
                                                         width: 2.0,
                                                       ),
                                                       borderRadius:
@@ -1814,51 +1361,41 @@ class _Auth3CopyWidgetState extends State<Auth3CopyWidget>
                                                               12.0),
                                                     ),
                                                     filled: true,
-                                                    fillColor: FlutterFlowTheme
-                                                            .of(context)
-                                                        .secondaryBackground,
+                                                    fillColor: Colors.white,
                                                     contentPadding:
                                                         EdgeInsetsDirectional
-                                                            .fromSTEB(
-                                                                24.0,
-                                                                24.0,
-                                                                0.0,
-                                                                24.0),
+                                                            .fromSTEB(24.0, 24.0,
+                                                                20.0, 24.0),
                                                   ),
                                                   style: FlutterFlowTheme.of(
                                                           context)
-                                                      .bodyLarge
+                                                      .bodyMedium
                                                       .override(
                                                         font: GoogleFonts.inter(
                                                           fontWeight:
-                                                              FlutterFlowTheme.of(
-                                                                      context)
-                                                                  .bodyLarge
-                                                                  .fontWeight,
+                                                              FontWeight.normal,
                                                           fontStyle:
                                                               FlutterFlowTheme.of(
                                                                       context)
-                                                                  .bodyLarge
+                                                                  .bodyMedium
                                                                   .fontStyle,
                                                         ),
+                                                        color:
+                                                            Color(0xFF14181B),
+                                                        fontSize: 14.0,
                                                         letterSpacing: 0.0,
                                                         fontWeight:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .bodyLarge
-                                                                .fontWeight,
+                                                            FontWeight.normal,
                                                         fontStyle:
                                                             FlutterFlowTheme.of(
                                                                     context)
-                                                                .bodyLarge
+                                                                .bodyMedium
                                                                 .fontStyle,
                                                       ),
                                                   keyboardType: TextInputType
                                                       .emailAddress,
                                                   cursorColor:
-                                                      FlutterFlowTheme.of(
-                                                              context)
-                                                          .primary,
+                                                      Color(0xFFF83B46),
                                                   validator: _model
                                                       .emailAddressTextControllerValidator
                                                       .asValidator(context),
@@ -1867,8 +1404,7 @@ class _Auth3CopyWidgetState extends State<Auth3CopyWidget>
                                             ),
                                             Padding(
                                               padding: EdgeInsetsDirectional
-                                                  .fromSTEB(
-                                                      0.0, 0.0, 0.0, 16.0),
+                                                  .fromSTEB(0.0, 0.0, 0.0, 16.0),
                                               child: Container(
                                                 width: double.infinity,
                                                 child: TextFormField(
@@ -1876,7 +1412,7 @@ class _Auth3CopyWidgetState extends State<Auth3CopyWidget>
                                                       .motdepassefieldTextController,
                                                   focusNode: _model
                                                       .motdepassefieldFocusNode,
-                                                  autofocus: true,
+                                                  autofocus: false,
                                                   autofillHints: [
                                                     AutofillHints.password
                                                   ],
@@ -1884,44 +1420,38 @@ class _Auth3CopyWidgetState extends State<Auth3CopyWidget>
                                                       .motdepassefieldVisibility,
                                                   decoration: InputDecoration(
                                                     labelText: 'Mot de passe',
-                                                    labelStyle: FlutterFlowTheme
-                                                            .of(context)
-                                                        .labelLarge
-                                                        .override(
-                                                          font:
-                                                              GoogleFonts.inter(
-                                                            fontWeight:
-                                                                FlutterFlowTheme.of(
+                                                    labelStyle:
+                                                        FlutterFlowTheme.of(
+                                                                context)
+                                                            .labelMedium
+                                                            .override(
+                                                              font: GoogleFonts
+                                                                  .inter(
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .normal,
+                                                                fontStyle: FlutterFlowTheme.of(
                                                                         context)
-                                                                    .labelLarge
-                                                                    .fontWeight,
-                                                            fontStyle:
-                                                                FlutterFlowTheme.of(
-                                                                        context)
-                                                                    .labelLarge
+                                                                    .labelMedium
                                                                     .fontStyle,
-                                                          ),
-                                                          letterSpacing: 0.0,
-                                                          fontWeight:
-                                                              FlutterFlowTheme.of(
-                                                                      context)
-                                                                  .labelLarge
-                                                                  .fontWeight,
-                                                          fontStyle:
-                                                              FlutterFlowTheme.of(
-                                                                      context)
-                                                                  .labelLarge
+                                                              ),
+                                                              color: Color(
+                                                                  0xFF677681),
+                                                              fontSize: 14.0,
+                                                              letterSpacing: 0.0,
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .normal,
+                                                              fontStyle: FlutterFlowTheme
+                                                                      .of(context)
+                                                                  .labelMedium
                                                                   .fontStyle,
-                                                        ),
-                                                    hintText:
-                                                        'Entree votre mot de passe',
+                                                            ),
                                                     enabledBorder:
                                                         OutlineInputBorder(
                                                       borderSide: BorderSide(
                                                         color:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .alternate,
+                                                            Color(0xFFE3E7ED),
                                                         width: 2.0,
                                                       ),
                                                       borderRadius:
@@ -1932,9 +1462,7 @@ class _Auth3CopyWidgetState extends State<Auth3CopyWidget>
                                                         OutlineInputBorder(
                                                       borderSide: BorderSide(
                                                         color:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .primary,
+                                                            Color(0xFFF83B46),
                                                         width: 2.0,
                                                       ),
                                                       borderRadius:
@@ -1945,9 +1473,7 @@ class _Auth3CopyWidgetState extends State<Auth3CopyWidget>
                                                         OutlineInputBorder(
                                                       borderSide: BorderSide(
                                                         color:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .error,
+                                                            Color(0xFFFF5963),
                                                         width: 2.0,
                                                       ),
                                                       borderRadius:
@@ -1958,9 +1484,7 @@ class _Auth3CopyWidgetState extends State<Auth3CopyWidget>
                                                         OutlineInputBorder(
                                                       borderSide: BorderSide(
                                                         color:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .error,
+                                                            Color(0xFFFF5963),
                                                         width: 2.0,
                                                       ),
                                                       borderRadius:
@@ -1968,16 +1492,11 @@ class _Auth3CopyWidgetState extends State<Auth3CopyWidget>
                                                               12.0),
                                                     ),
                                                     filled: true,
-                                                    fillColor: FlutterFlowTheme
-                                                            .of(context)
-                                                        .secondaryBackground,
+                                                    fillColor: Colors.white,
                                                     contentPadding:
                                                         EdgeInsetsDirectional
-                                                            .fromSTEB(
-                                                                24.0,
-                                                                24.0,
-                                                                0.0,
-                                                                24.0),
+                                                            .fromSTEB(24.0, 24.0,
+                                                                20.0, 24.0),
                                                     suffixIcon: InkWell(
                                                       onTap: () => safeSetState(
                                                         () => _model
@@ -1994,45 +1513,38 @@ class _Auth3CopyWidgetState extends State<Auth3CopyWidget>
                                                             : Icons
                                                                 .visibility_off_outlined,
                                                         color:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .secondaryText,
+                                                            Color(0xFF677681),
                                                         size: 24.0,
                                                       ),
                                                     ),
                                                   ),
                                                   style: FlutterFlowTheme.of(
                                                           context)
-                                                      .bodyLarge
+                                                      .bodyMedium
                                                       .override(
                                                         font: GoogleFonts.inter(
                                                           fontWeight:
-                                                              FlutterFlowTheme.of(
-                                                                      context)
-                                                                  .bodyLarge
-                                                                  .fontWeight,
+                                                              FontWeight.normal,
                                                           fontStyle:
                                                               FlutterFlowTheme.of(
                                                                       context)
-                                                                  .bodyLarge
+                                                                  .bodyMedium
                                                                   .fontStyle,
                                                         ),
+                                                        color:
+                                                            Color(0xFF14181B),
+                                                        fontSize: 14.0,
                                                         letterSpacing: 0.0,
                                                         fontWeight:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .bodyLarge
-                                                                .fontWeight,
+                                                            FontWeight.normal,
                                                         fontStyle:
                                                             FlutterFlowTheme.of(
                                                                     context)
-                                                                .bodyLarge
+                                                                .bodyMedium
                                                                 .fontStyle,
                                                       ),
                                                   cursorColor:
-                                                      FlutterFlowTheme.of(
-                                                              context)
-                                                          .primary,
+                                                      Color(0xFFF83B46),
                                                   validator: _model
                                                       .motdepassefieldTextControllerValidator
                                                       .asValidator(context),
@@ -2040,116 +1552,94 @@ class _Auth3CopyWidgetState extends State<Auth3CopyWidget>
                                               ),
                                             ),
                                             Align(
-                                              alignment: AlignmentDirectional(
-                                                  0.0, 0.0),
+                                              alignment:
+                                                  AlignmentDirectional(0.0, 0.0),
                                               child: Padding(
                                                 padding: EdgeInsetsDirectional
                                                     .fromSTEB(
                                                         0.0, 0.0, 0.0, 16.0),
                                                 child: FFButtonWidget(
                                                   onPressed: () async {
-                                                    GoRouter.of(context)
-                                                        .prepareAuthEvent();
-
-                                                    final user =
-                                                        await authManager
-                                                            .signInWithEmail(
-                                                      context,
-                                                      _model
-                                                          .emailAddressTextController
-                                                          .text,
-                                                      _model
-                                                          .motdepassefieldTextController
-                                                          .text,
-                                                    );
-                                                    if (user == null) {
+                                                    if (_model.emailAddressTextController.text.isEmpty ||
+                                                        _model.motdepassefieldTextController.text.isEmpty) {
+                                                      ScaffoldMessenger.of(context).showSnackBar(
+                                                        SnackBar(content: Text('Veuillez remplir tous les champs')),
+                                                      );
                                                       return;
                                                     }
 
-                                                    _model.ro =
-                                                        await ProfilesTable()
-                                                            .queryRows(
-                                                      queryFn: (q) =>
-                                                          q.eqOrNull(
-                                                        'id',
-                                                        currentUserUid,
-                                                      ),
+                                                    final user = await authManager.signInWithEmail(
+                                                      context,
+                                                      _model.emailAddressTextController.text,
+                                                      _model.motdepassefieldTextController.text,
                                                     );
-                                                    if (widget!.role ==
-                                                        'prestataire') {
-                                                      context.pushNamedAuth(
-                                                          PrestataireHomePageWidget
-                                                              .routeName,
-                                                          context.mounted);
-                                                    } else {
-                                                      ScaffoldMessenger.of(
-                                                              context)
-                                                          .showSnackBar(
-                                                        SnackBar(
-                                                          content: Text(
-                                                            'erreur',
-                                                            style: TextStyle(
-                                                              color: FlutterFlowTheme
-                                                                      .of(context)
-                                                                  .primaryText,
-                                                            ),
-                                                          ),
-                                                          duration: Duration(
-                                                              milliseconds:
-                                                                  4000),
-                                                          backgroundColor:
-                                                              FlutterFlowTheme.of(
-                                                                      context)
-                                                                  .secondary,
-                                                        ),
-                                                      );
-                                                    }
 
-                                                    safeSetState(() {});
+                                                    if (user != null) {
+                                                      // Get user role
+                                                      _model.prestataire = await ProfilesTable().queryRows(
+                                                        queryFn: (q) => q.eqOrNull('id', currentUserUid),
+                                                      );
+
+                                                      if (_model.prestataire?.isNotEmpty == true) {
+                                                        final userRole = _model.prestataire!.first.role;
+                                                        if (userRole == 'client') {
+                                                          context.pushNamedAuth(
+                                                            CustomerhomepageWidget.routeName,
+                                                            context.mounted,
+                                                          );
+                                                        } else {
+                                                          context.pushNamedAuth(
+                                                            PrestataireHomePageWidget.routeName,
+                                                            context.mounted,
+                                                          );
+                                                        }
+                                                      } else {
+                                                        context.pushNamedAuth(
+                                                          ChoixduroleWidget.routeName,
+                                                          context.mounted,
+                                                        );
+                                                      }
+                                                    }
                                                   },
-                                                  text: 'Connexion',
+                                                  text: 'Se connecter',
                                                   options: FFButtonOptions(
-                                                    width: 230.0,
-                                                    height: 52.0,
+                                                    width: double.infinity,
+                                                    height: 44.0,
                                                     padding:
                                                         EdgeInsetsDirectional
-                                                            .fromSTEB(0.0, 0.0,
-                                                                0.0, 0.0),
+                                                            .fromSTEB(24.0, 0.0,
+                                                                24.0, 0.0),
                                                     iconPadding:
                                                         EdgeInsetsDirectional
                                                             .fromSTEB(0.0, 0.0,
                                                                 0.0, 0.0),
-                                                    color: Color(0xFFEF1096),
-                                                    textStyle: FlutterFlowTheme
-                                                            .of(context)
-                                                        .titleSmall
-                                                        .override(
-                                                          font: GoogleFonts
-                                                              .interTight(
-                                                            fontWeight:
-                                                                FlutterFlowTheme.of(
-                                                                        context)
-                                                                    .titleSmall
-                                                                    .fontWeight,
-                                                            fontStyle:
-                                                                FlutterFlowTheme.of(
+                                                    color: Color(0xFFF83B46),
+                                                    textStyle:
+                                                        FlutterFlowTheme.of(
+                                                                context)
+                                                            .titleSmall
+                                                            .override(
+                                                              font: GoogleFonts
+                                                                  .inter(
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .w600,
+                                                                fontStyle: FlutterFlowTheme.of(
                                                                         context)
                                                                     .titleSmall
                                                                     .fontStyle,
-                                                          ),
-                                                          color: Colors.white,
-                                                          letterSpacing: 0.0,
-                                                          fontWeight:
-                                                              FlutterFlowTheme.of(
-                                                                      context)
-                                                                  .titleSmall
-                                                                  .fontWeight,
-                                                          fontStyle:
-                                                              FlutterFlowTheme.of(
-                                                                      context)
+                                                              ),
+                                                              color:
+                                                                  Colors.white,
+                                                              fontSize: 16.0,
+                                                              letterSpacing: 0.0,
+                                                              fontWeight:
+                                                                  FontWeight.w600,
+                                                              fontStyle: FlutterFlowTheme
+                                                                      .of(context)
                                                                   .titleSmall
                                                                   .fontStyle,
-                                                        ),
+                                                            ),
                                                     elevation: 3.0,
                                                     borderSide: BorderSide(
                                                       color: Colors.transparent,
@@ -2162,347 +1652,12 @@ class _Auth3CopyWidgetState extends State<Auth3CopyWidget>
                                                 ),
                                               ),
                                             ),
-                                            Align(
-                                              alignment: AlignmentDirectional(
-                                                  0.0, 0.0),
-                                              child: Padding(
-                                                padding: EdgeInsetsDirectional
-                                                    .fromSTEB(
-                                                        16.0, 0.0, 16.0, 24.0),
-                                                child: Text(
-                                                  'Pas encore inscrit?Créer un compte',
-                                                  textAlign: TextAlign.center,
-                                                  style: FlutterFlowTheme.of(
-                                                          context)
-                                                      .labelMedium
-                                                      .override(
-                                                        font: GoogleFonts.inter(
-                                                          fontWeight:
-                                                              FlutterFlowTheme.of(
-                                                                      context)
-                                                                  .labelMedium
-                                                                  .fontWeight,
-                                                          fontStyle:
-                                                              FlutterFlowTheme.of(
-                                                                      context)
-                                                                  .labelMedium
-                                                                  .fontStyle,
-                                                        ),
-                                                        letterSpacing: 0.0,
-                                                        fontWeight:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .labelMedium
-                                                                .fontWeight,
-                                                        fontStyle:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .labelMedium
-                                                                .fontStyle,
-                                                      ),
-                                                ),
-                                              ),
-                                            ),
-                                            Align(
-                                              alignment: AlignmentDirectional(
-                                                  0.0, 0.0),
-                                              child: Wrap(
-                                                spacing: 16.0,
-                                                runSpacing: 0.0,
-                                                alignment: WrapAlignment.center,
-                                                crossAxisAlignment:
-                                                    WrapCrossAlignment.center,
-                                                direction: Axis.horizontal,
-                                                runAlignment:
-                                                    WrapAlignment.center,
-                                                verticalDirection:
-                                                    VerticalDirection.down,
-                                                clipBehavior: Clip.none,
-                                                children: [
-                                                  Padding(
-                                                    padding:
-                                                        EdgeInsetsDirectional
-                                                            .fromSTEB(0.0, 0.0,
-                                                                0.0, 16.0),
-                                                    child: FFButtonWidget(
-                                                      onPressed: () async {
-                                                        GoRouter.of(context)
-                                                            .prepareAuthEvent();
-
-                                                        final user =
-                                                            await authManager
-                                                                .signInWithEmail(
-                                                          context,
-                                                          _model
-                                                              .emailAddressTextController
-                                                              .text,
-                                                          _model
-                                                              .motdepassefieldTextController
-                                                              .text,
-                                                        );
-                                                        if (user == null) {
-                                                          return;
-                                                        }
-
-                                                        _model.prestataire =
-                                                            await ProfilesTable()
-                                                                .queryRows(
-                                                          queryFn: (q) =>
-                                                              q.eqOrNull(
-                                                            'id',
-                                                            currentUserUid,
-                                                          ),
-                                                        );
-                                                        if (_model
-                                                                .ro
-                                                                ?.firstOrNull
-                                                                ?.role ==
-                                                            'prestataire') {
-                                                          context.pushNamedAuth(
-                                                              PrestataireHomePageWidget
-                                                                  .routeName,
-                                                              context.mounted);
-                                                        } else {
-                                                          ScaffoldMessenger.of(
-                                                                  context)
-                                                              .showSnackBar(
-                                                            SnackBar(
-                                                              content: Text(
-                                                                'erreur',
-                                                                style:
-                                                                    TextStyle(
-                                                                  color: FlutterFlowTheme.of(
-                                                                          context)
-                                                                      .primaryText,
-                                                                ),
-                                                              ),
-                                                              duration: Duration(
-                                                                  milliseconds:
-                                                                      4000),
-                                                              backgroundColor:
-                                                                  FlutterFlowTheme.of(
-                                                                          context)
-                                                                      .secondary,
-                                                            ),
-                                                          );
-                                                        }
-
-                                                        safeSetState(() {});
-                                                      },
-                                                      text:
-                                                          'Continue with Google',
-                                                      icon: FaIcon(
-                                                        FontAwesomeIcons.google,
-                                                        size: 20.0,
-                                                      ),
-                                                      options: FFButtonOptions(
-                                                        width: 230.0,
-                                                        height: 44.0,
-                                                        padding:
-                                                            EdgeInsetsDirectional
-                                                                .fromSTEB(
-                                                                    0.0,
-                                                                    0.0,
-                                                                    0.0,
-                                                                    0.0),
-                                                        iconPadding:
-                                                            EdgeInsetsDirectional
-                                                                .fromSTEB(
-                                                                    0.0,
-                                                                    0.0,
-                                                                    0.0,
-                                                                    0.0),
-                                                        color: FlutterFlowTheme
-                                                                .of(context)
-                                                            .secondaryBackground,
-                                                        textStyle:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .bodyMedium
-                                                                .override(
-                                                                  font:
-                                                                      GoogleFonts
-                                                                          .inter(
-                                                                    fontWeight:
-                                                                        FontWeight
-                                                                            .bold,
-                                                                    fontStyle: FlutterFlowTheme.of(
-                                                                            context)
-                                                                        .bodyMedium
-                                                                        .fontStyle,
-                                                                  ),
-                                                                  letterSpacing:
-                                                                      0.0,
-                                                                  fontWeight:
-                                                                      FontWeight
-                                                                          .bold,
-                                                                  fontStyle: FlutterFlowTheme.of(
-                                                                          context)
-                                                                      .bodyMedium
-                                                                      .fontStyle,
-                                                                ),
-                                                        elevation: 0.0,
-                                                        borderSide: BorderSide(
-                                                          color: FlutterFlowTheme
-                                                                  .of(context)
-                                                              .alternate,
-                                                          width: 2.0,
-                                                        ),
-                                                        borderRadius:
-                                                            BorderRadius
-                                                                .circular(12.0),
-                                                        hoverColor:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .primaryBackground,
-                                                      ),
-                                                    ),
-                                                  ),
-                                                ],
-                                              ),
-                                            ),
-                                            Align(
-                                              alignment: AlignmentDirectional(
-                                                  0.0, 0.0),
-                                              child: Padding(
-                                                padding: EdgeInsetsDirectional
-                                                    .fromSTEB(
-                                                        0.0, 0.0, 0.0, 16.0),
-                                                child: FFButtonWidget(
-                                                  onPressed: () {
-                                                    print('Button pressed ...');
-                                                  },
-                                                  text: 'Mot de passe oublie?',
-                                                  options: FFButtonOptions(
-                                                    height: 44.0,
-                                                    padding:
-                                                        EdgeInsetsDirectional
-                                                            .fromSTEB(32.0, 0.0,
-                                                                32.0, 0.0),
-                                                    iconPadding:
-                                                        EdgeInsetsDirectional
-                                                            .fromSTEB(0.0, 0.0,
-                                                                0.0, 0.0),
-                                                    color: FlutterFlowTheme.of(
-                                                            context)
-                                                        .secondaryBackground,
-                                                    textStyle: FlutterFlowTheme
-                                                            .of(context)
-                                                        .bodyMedium
-                                                        .override(
-                                                          font:
-                                                              GoogleFonts.inter(
-                                                            fontWeight:
-                                                                FontWeight.bold,
-                                                            fontStyle:
-                                                                FlutterFlowTheme.of(
-                                                                        context)
-                                                                    .bodyMedium
-                                                                    .fontStyle,
-                                                          ),
-                                                          letterSpacing: 0.0,
-                                                          fontWeight:
-                                                              FontWeight.bold,
-                                                          fontStyle:
-                                                              FlutterFlowTheme.of(
-                                                                      context)
-                                                                  .bodyMedium
-                                                                  .fontStyle,
-                                                        ),
-                                                    elevation: 0.0,
-                                                    borderSide: BorderSide(
-                                                      color: FlutterFlowTheme
-                                                              .of(context)
-                                                          .secondaryBackground,
-                                                      width: 2.0,
-                                                    ),
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            40.0),
-                                                    hoverColor:
-                                                        FlutterFlowTheme.of(
-                                                                context)
-                                                            .primaryBackground,
-                                                  ),
-                                                ),
-                                              ),
-                                            ),
                                           ],
                                         ),
-                                      ).animateOnPageLoad(animationsMap[
-                                          'columnOnPageLoadAnimation2']!),
+                                      ),
                                     ),
                                   ),
                                 ],
-                              ),
-                            ),
-                            Align(
-                              alignment: Alignment(0.0, 0),
-                              child: FlutterFlowButtonTabBar(
-                                useToggleButtonStyle: true,
-                                labelStyle: FlutterFlowTheme.of(context)
-                                    .bodyLarge
-                                    .override(
-                                      font: GoogleFonts.inter(
-                                        fontWeight: FontWeight.bold,
-                                        fontStyle: FlutterFlowTheme.of(context)
-                                            .bodyLarge
-                                            .fontStyle,
-                                      ),
-                                      letterSpacing: 0.0,
-                                      fontWeight: FontWeight.bold,
-                                      fontStyle: FlutterFlowTheme.of(context)
-                                          .bodyLarge
-                                          .fontStyle,
-                                    ),
-                                unselectedLabelStyle: FlutterFlowTheme.of(
-                                        context)
-                                    .bodyLarge
-                                    .override(
-                                      font: GoogleFonts.inter(
-                                        fontWeight: FlutterFlowTheme.of(context)
-                                            .bodyLarge
-                                            .fontWeight,
-                                        fontStyle: FlutterFlowTheme.of(context)
-                                            .bodyLarge
-                                            .fontStyle,
-                                      ),
-                                      letterSpacing: 0.0,
-                                      fontWeight: FlutterFlowTheme.of(context)
-                                          .bodyLarge
-                                          .fontWeight,
-                                      fontStyle: FlutterFlowTheme.of(context)
-                                          .bodyLarge
-                                          .fontStyle,
-                                    ),
-                                labelColor: Color(0xFFF0F4F7),
-                                unselectedLabelColor: Color(0xFFEFF4F7),
-                                backgroundColor: Color(0xFFD60E73),
-                                unselectedBackgroundColor: Color(0xFFF33D98),
-                                borderColor: Color(0xFFEDEFF2),
-                                unselectedBorderColor:
-                                    FlutterFlowTheme.of(context).alternate,
-                                borderWidth: 2.0,
-                                borderRadius: 12.0,
-                                elevation: 0.0,
-                                labelPadding: EdgeInsetsDirectional.fromSTEB(
-                                    16.0, 0.0, 16.0, 0.0),
-                                buttonMargin: EdgeInsetsDirectional.fromSTEB(
-                                    12.0, 0.0, 12.0, 0.0),
-                                padding: EdgeInsetsDirectional.fromSTEB(
-                                    16.0, 0.0, 16.0, 0.0),
-                                tabs: [
-                                  Tab(
-                                    text: 'Créer un compte',
-                                  ),
-                                  Tab(
-                                    text: 'Se connecter',
-                                  ),
-                                ],
-                                controller: _model.tabBarController,
-                                onTap: (i) async {
-                                  [() async {}, () async {}][i]();
-                                },
                               ),
                             ),
                           ],
@@ -2511,9 +1666,9 @@ class _Auth3CopyWidgetState extends State<Auth3CopyWidget>
                     ).animateOnPageLoad(
                         animationsMap['containerOnPageLoadAnimation']!),
                   ),
-                ),
+                ],
               ),
-            ],
+            ),
           ),
         ),
       ),

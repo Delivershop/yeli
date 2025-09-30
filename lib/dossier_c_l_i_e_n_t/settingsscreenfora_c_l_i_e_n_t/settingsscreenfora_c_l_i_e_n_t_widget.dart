@@ -718,7 +718,12 @@ class _SettingsscreenforaCLIENTWidgetState
                           ),
                           FFButtonWidget(
                             onPressed: () {
-                              print('Button pressed ...');
+                              authManager.signOut().then((_) {
+                                context.pushNamedAuth(
+                                  ChoixduroleWidget.routeName,
+                                  context.mounted,
+                                );
+                              });
                             },
                             text: 'Déconnexion',
                             icon: Icon(

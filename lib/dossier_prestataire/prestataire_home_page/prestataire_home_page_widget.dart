@@ -429,7 +429,7 @@ class _PrestataireHomePageWidgetState extends State<PrestataireHomePageWidget> {
                   ),
                   FFButtonWidget(
                     onPressed: () {
-                      print('Button pressed ...');
+                      context.pushNamed(DemandesRecuesPageWidget.routeName);
                     },
                     text: 'Voir les demandes reçues',
                     icon: Icon(

@@ -11,11 +11,9 @@ import 'uploaded_file.dart';
 import '/backend/supabase/supabase.dart';
 import '/auth/supabase_auth/auth_util.dart';
 
-List<String>? wrapWithPercent() {
-  String wrapWithPercent(String input) {
-    if (input == null || input.isEmpty) {
-      return '%'; // si rien n'est saisi, retourne % pour matcher tout
-    }
-    return '%$input%';
+List<String>? wrapWithPercent(String input) {
+  if (input.isEmpty) {
+    return ['%']; // si rien n'est saisi, retourne % pour matcher tout
   }
+  return ['%$input%'];
 }

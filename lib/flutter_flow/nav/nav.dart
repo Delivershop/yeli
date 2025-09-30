@@ -84,14 +84,14 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
       refreshListenable: appStateNotifier,
       navigatorKey: appNavigatorKey,
       errorBuilder: (context, state) => appStateNotifier.loggedIn
-          ? CustomerhomepageWidget()
+          ? SplashScreenWidget()
           : SplashScreenWidget(),
       routes: [
         FFRoute(
           name: '_initialize',
           path: '/',
           builder: (context, _) => appStateNotifier.loggedIn
-              ? CustomerhomepageWidget()
+              ? SplashScreenWidget()
               : SplashScreenWidget(),
         ),
         FFRoute(

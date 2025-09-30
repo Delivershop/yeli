@@ -589,7 +589,7 @@ class _ContactClientPageWidgetState extends State<ContactClientPageWidget> {
                     children: [
                       FFButtonWidget(
                         onPressed: () {
-                          print('Button pressed ...');
+                          launchURL('https://wa.me/+22507123456?text=Bonjour%20je%20réponds%20à%20votre%20demande%20sur%20Yeli');
                         },
                         text: 'Contacter sur WhatsApp',
                         icon: Icon(
@@ -630,7 +630,7 @@ class _ContactClientPageWidgetState extends State<ContactClientPageWidget> {
                       ),
                       FFButtonWidget(
                         onPressed: () {
-                          print('Button pressed ...');
+                          launchURL('tel:+22507123456');
                         },
                         text: 'Appeler le client',
                         icon: Icon(

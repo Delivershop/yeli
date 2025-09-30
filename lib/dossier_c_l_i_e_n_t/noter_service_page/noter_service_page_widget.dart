@@ -509,7 +509,11 @@ class _NoterServicePageWidgetState extends State<NoterServicePageWidget> {
                   ),
                   FFButtonWidget(
                     onPressed: () {
-                      print('Button pressed ...');
+                      // Save review logic here
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(content: Text('Merci pour votre évaluation!')),
+                      );
+                      context.safePop();
                     },
                     text: 'Submit Review',
                     icon: Icon(
