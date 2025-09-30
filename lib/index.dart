@@ -1,0 +1,38 @@
+// Export pages
+export '/dossier_a_u_t_h/choixdurole/choixdurole_widget.dart'
+    show ChoixduroleWidget;
+export '/dossier_a_u_t_h/splash_screen/splash_screen_widget.dart'
+    show SplashScreenWidget;
+export '/dossier_c_l_i_e_n_t/prestataire_list_page/prestataire_list_page_widget.dart'
+    show PrestataireListPageWidget;
+export '/dossier_c_l_i_e_n_t/prestataire_profile_page/prestataire_profile_page_widget.dart'
+    show PrestataireProfilePageWidget;
+export '/dossier_c_l_i_e_n_t/mes_demandes_page/mes_demandes_page_widget.dart'
+    show MesDemandesPageWidget;
+export '/dossier_c_l_i_e_n_t/noter_service_page/noter_service_page_widget.dart'
+    show NoterServicePageWidget;
+export '/dossier_prestataire/prestataire_home_page/prestataire_home_page_widget.dart'
+    show PrestataireHomePageWidget;
+export '/dossier_prestataire/demandes_recues_page/demandes_recues_page_widget.dart'
+    show DemandesRecuesPageWidget;
+export '/dossier_prestataire/portefeuille_page/portefeuille_page_widget.dart'
+    show PortefeuillePageWidget;
+export '/dossier_prestataire/historique_page/historique_page_widget.dart'
+    show HistoriquePageWidget;
+export '/dossierparametre/settings_page/settings_page_widget.dart'
+    show SettingsPageWidget;
+export '/dossierparametre/support_page/support_page_widget.dart'
+    show SupportPageWidget;
+export '/dossier_c_l_i_e_n_t/contact_prestataire_page/contact_prestataire_page_widget.dart'
+    show ContactPrestatairePageWidget;
+export '/dossier_prestataire/contact_client_page/contact_client_page_widget.dart'
+    show ContactClientPageWidget;
+export '/dossier_c_l_i_e_n_t/settingsscreenfora_c_l_i_e_n_t/settingsscreenfora_c_l_i_e_n_t_widget.dart'
+    show SettingsscreenforaCLIENTWidget;
+export '/dossier_prestataire/settingsscreenfora_p_r_o_v_i_d_e/settingsscreenfora_p_r_o_v_i_d_e_widget.dart'
+    show SettingsscreenforaPROVIDEWidget;
+export '/dossier_c_l_i_e_n_t/customerhomepage/customerhomepage_widget.dart'
+    show CustomerhomepageWidget;
+export '/dossier_a_u_t_h/auth3/auth3_widget.dart' show Auth3Widget;
+export '/dossier_a_u_t_h/auth3_copy/auth3_copy_widget.dart'
+    show Auth3CopyWidget;

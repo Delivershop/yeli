@@ -1,0 +1,3 @@
+{
+  "wrapWithPercent": "String wrapWithPercent(String input) {   return \'%\$input%\'; }"
+}
