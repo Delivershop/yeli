@@ -80,7 +80,7 @@ class _SupportPageWidgetState extends State<SupportPageWidget> {
               size: 24.0,
             ),
             onPressed: () {
-              print('IconButton pressed ...');
+              context.safePop();
             },
           ),
           title: Text(

@@ -1,3 +1,5 @@
+import '/auth/supabase_auth/auth_util.dart';
+import '/backend/supabase/supabase.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
@@ -10,11 +12,6 @@ import 'package:provider/provider.dart';
 import 'noter_service_page_model.dart';
 export 'noter_service_page_model.dart';
 
-/// Create a page name: "NoterServicePage"
-/// - Allow the client to leave a review:
-///    - 5-star rating component
-///    - Optional comment field
-///    - Submit button → saves to Firestore (later)
 class NoterServicePageWidget extends StatefulWidget {
   const NoterServicePageWidget({super.key});
 
@@ -29,6 +26,7 @@ class _NoterServicePageWidgetState extends State<NoterServicePageWidget> {
   late NoterServicePageModel _model;
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
+  int _rating = 0;
 
   @override
   void initState() {
@@ -42,7 +40,6 @@ class _NoterServicePageWidgetState extends State<NoterServicePageWidget> {
   @override
   void dispose() {
     _model.dispose();
-
     super.dispose();
   }
 
@@ -69,12 +66,12 @@ class _NoterServicePageWidgetState extends State<NoterServicePageWidget> {
               color: FlutterFlowTheme.of(context).primaryText,
               size: 24.0,
             ),
-            onPressed: () {
-              print('IconButton pressed ...');
+            onPressed: () async {
+              context.safePop();
             },
           ),
           title: Text(
-            'Leave a Review',
+            'Noter le service',
             style: FlutterFlowTheme.of(context).headlineMedium.override(
                   font: GoogleFonts.interTight(
                     fontWeight: FontWeight.w600,
@@ -122,7 +119,7 @@ class _NoterServicePageWidgetState extends State<NoterServicePageWidget> {
                         ),
                       ),
                       Text(
-                        'How was your experience with our noter service?',
+                        'Comment s\'est passé votre service ?',
                         textAlign: TextAlign.center,
                         style:
                             FlutterFlowTheme.of(context).headlineSmall.override(
@@ -145,7 +142,7 @@ class _NoterServicePageWidgetState extends State<NoterServicePageWidget> {
                                 ),
                       ),
                       Text(
-                        'Your feedback helps us improve our service and helps other clients make informed decisions.',
+                        'Votre avis nous aide à améliorer notre service et aide les autres clients à faire des choix éclairés.',
                         textAlign: TextAlign.center,
                         style: FlutterFlowTheme.of(context).bodyMedium.override(
                               font: GoogleFonts.inter(
@@ -178,7 +175,7 @@ class _NoterServicePageWidgetState extends State<NoterServicePageWidget> {
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
                           Text(
-                            'Rate your experience',
+                            'Notez votre expérience',
                             style: FlutterFlowTheme.of(context)
                                 .titleMedium
                                 .override(
@@ -198,36 +195,23 @@ class _NoterServicePageWidgetState extends State<NoterServicePageWidget> {
                           Row(
                             mainAxisSize: MainAxisSize.max,
                             mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Icon(
-                                Icons.star_rounded,
-                                color: Color(0xFFD4AF37),
-                                size: 40.0,
-                              ),
-                              Icon(
-                                Icons.star_rounded,
-                                color: Color(0xFFD4AF37),
-                                size: 40.0,
-                              ),
-                              Icon(
-                                Icons.star_rounded,
-                                color: Color(0xFFD4AF37),
-                                size: 40.0,
-                              ),
-                              Icon(
-                                Icons.star_rounded,
-                                color: Color(0xFFD4AF37),
-                                size: 40.0,
-                              ),
-                              Icon(
-                                Icons.star_rounded,
-                                color: Color(0xFFD4AF37),
-                                size: 40.0,
-                              ),
-                            ].divide(SizedBox(width: 8.0)),
+                            children: List.generate(5, (index) => 
+                              InkWell(
+                                onTap: () {
+                                  setState(() {
+                                    _rating = index + 1;
+                                  });
+                                },
+                                child: Icon(
+                                  Icons.star_rounded,
+                                  color: index < _rating ? Color(0xFFD4AF37) : Color(0xFFE0E3E7),
+                                  size: 40.0,
+                                ),
+                              )
+                            ).divide(SizedBox(width: 8.0)),
                           ),
                           Text(
-                            'Tap stars to rate',
+                            'Appuyez sur les étoiles pour noter',
                             style:
                                 FlutterFlowTheme.of(context).bodySmall.override(
                                       font: GoogleFonts.inter(
@@ -257,7 +241,7 @@ class _NoterServicePageWidgetState extends State<NoterServicePageWidget> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            'Add a comment (optional)',
+                            'Ajouter un commentaire (optionnel)',
                             style: FlutterFlowTheme.of(context)
                                 .titleMedium
                                 .override(
@@ -301,7 +285,7 @@ class _NoterServicePageWidgetState extends State<NoterServicePageWidget> {
                                         .fontStyle,
                                   ),
                               hintText:
-                                  'Tell us about your experience with the noter service...',
+                                  'Parlez-nous de votre expérience avec ce service...',
                               hintStyle: FlutterFlowTheme.of(context)
                                   .bodyMedium
                                   .override(
@@ -383,20 +367,9 @@ class _NoterServicePageWidgetState extends State<NoterServicePageWidget> {
                             cursorColor: FlutterFlowTheme.of(context).primary,
                             validator: _model.textControllerValidator
                                 .asValidator(context),
-                            inputFormatters: [
-                              if (!isAndroid && !isiOS)
-                                TextInputFormatter.withFunction(
-                                    (oldValue, newValue) {
-                                  return TextEditingValue(
-                                    selection: newValue.selection,
-                                    text: newValue.text.toCapitalization(
-                                        TextCapitalization.sentences),
-                                  );
-                                }),
-                            ],
                           ),
                           Text(
-                            'Share details about the quality of notes, timeliness, communication, or any other aspects of the service.',
+                            'Partagez les détails sur la qualité du service, la ponctualité, la communication ou tout autre aspect du service.',
                             style:
                                 FlutterFlowTheme.of(context).bodySmall.override(
                                       font: GoogleFonts.inter(
@@ -448,7 +421,7 @@ class _NoterServicePageWidgetState extends State<NoterServicePageWidget> {
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Text(
-                                    'Your review will be visible to other clients',
+                                    'Votre avis sera visible par les autres clients',
                                     style: FlutterFlowTheme.of(context)
                                         .bodyMedium
                                         .override(
@@ -470,7 +443,7 @@ class _NoterServicePageWidgetState extends State<NoterServicePageWidget> {
                                         ),
                                   ),
                                   Text(
-                                    'Help others by sharing your honest experience with this noter service.',
+                                    'Aidez les autres en partageant votre expérience honnête avec ce service.',
                                     style: FlutterFlowTheme.of(context)
                                         .bodySmall
                                         .override(
@@ -508,14 +481,34 @@ class _NoterServicePageWidgetState extends State<NoterServicePageWidget> {
                     ),
                   ),
                   FFButtonWidget(
-                    onPressed: () {
-                      // Save review logic here
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        SnackBar(content: Text('Merci pour votre évaluation!')),
-                      );
-                      context.safePop();
+                    onPressed: () async {
+                      if (_rating == 0) {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(content: Text('Veuillez sélectionner une note')),
+                        );
+                        return;
+                      }
+
+                      try {
+                        await ReviewsTable().insert({
+                          'client_id': currentUserUid,
+                          'rating': _rating,
+                          'comment': _model.textController.text.isNotEmpty 
+                              ? _model.textController.text 
+                              : null,
+                        });
+
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(content: Text('Merci pour votre évaluation!')),
+                        );
+                        context.safePop();
+                      } catch (e) {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(content: Text('Erreur lors de l\'enregistrement')),
+                        );
+                      }
                     },
-                    text: 'Submit Review',
+                    text: 'Soumettre l\'avis',
                     icon: Icon(
                       Icons.send_rounded,
                       size: 20.0,

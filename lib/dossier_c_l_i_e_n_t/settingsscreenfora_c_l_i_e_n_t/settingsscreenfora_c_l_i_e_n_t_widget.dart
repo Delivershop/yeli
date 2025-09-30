@@ -75,7 +75,7 @@ class _SettingsscreenforaCLIENTWidgetState
               size: 24.0,
             ),
             onPressed: () {
-              print('IconButton pressed ...');
+              context.safePop();
             },
           ),
           title: Text(
@@ -432,7 +432,10 @@ class _SettingsscreenforaCLIENTWidgetState
                           ),
                           FFButtonWidget(
                             onPressed: () {
-                              print('Button pressed ...');
+                              // Navigate to edit profile page (to be implemented)
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                SnackBar(content: Text('Modification du profil bientôt disponible')),
+                              );
                             },
                             text: 'Modifier mes informations',
                             icon: Icon(
@@ -573,7 +576,10 @@ class _SettingsscreenforaCLIENTWidgetState
                           ),
                           FFButtonWidget(
                             onPressed: () {
-                              print('Button pressed ...');
+                              // Navigate to change password page (to be implemented)
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                SnackBar(content: Text('Changement de mot de passe bientôt disponible')),
+                              );
                             },
                             text: 'Changer mon mot de passe',
                             icon: Icon(

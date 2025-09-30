@@ -82,7 +82,7 @@ class _ContactClientPageWidgetState extends State<ContactClientPageWidget> {
               size: 24.0,
             ),
             onPressed: () {
-              print('IconButton pressed ...');
+              context.safePop();
             },
           ),
           title: Text(
@@ -522,7 +522,7 @@ class _ContactClientPageWidgetState extends State<ContactClientPageWidget> {
                                             child: Container(
                                               child: FFButtonWidget(
                                                 onPressed: () {
-                                                  print('Button pressed ...');
+                                                  launchURL('tel:+22507123456');
                                                 },
                                                 text: '+225 07 12 34 56 78',
                                                 options: FFButtonOptions(

@@ -1,23 +1,17 @@
+import '/auth/supabase_auth/auth_util.dart';
+import '/backend/supabase/supabase.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import 'dart:ui';
+import '/index.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'prestataire_home_page_model.dart';
 export 'prestataire_home_page_model.dart';
 
-/// Create a page1.
-///
-/// name: "PrestataireHomePage"
-/// - Display a welcome message with the provider's name
-/// - Show quick stats:
-///    - Solde actuel (balance)
-///    - Nombre de demandes reçues
-///    - Disponibilité (On/Off switch)
-/// - A button to go to "DemandesRecuesPage"
 class PrestataireHomePageWidget extends StatefulWidget {
   const PrestataireHomePageWidget({super.key});
 
@@ -45,7 +39,6 @@ class _PrestataireHomePageWidgetState extends State<PrestataireHomePageWidget> {
   @override
   void dispose() {
     _model.dispose();
-
     super.dispose();
   }
 
@@ -86,12 +79,12 @@ class _PrestataireHomePageWidgetState extends State<PrestataireHomePageWidget> {
                 buttonSize: 48.0,
                 fillColor: Colors.white,
                 icon: Icon(
-                  Icons.notifications_rounded,
+                  Icons.settings,
                   color: Color(0xFF14181B),
                   size: 24.0,
                 ),
-                onPressed: () {
-                  print('IconButton pressed ...');
+                onPressed: () async {
+                  context.pushNamed(SettingsscreenforaPROVIDEWidget.routeName);
                 },
               ),
             ),
@@ -108,77 +101,85 @@ class _PrestataireHomePageWidgetState extends State<PrestataireHomePageWidget> {
                 mainAxisSize: MainAxisSize.max,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Row(
-                    mainAxisSize: MainAxisSize.max,
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Column(
+                  FutureBuilder<List<ProfilesRow>>(
+                    future: ProfilesTable().queryRows(
+                      queryFn: (q) => q.eqOrNull('id', currentUserUid),
+                    ),
+                    builder: (context, snapshot) {
+                      final profile = snapshot.data?.firstOrNull;
+                      return Row(
                         mainAxisSize: MainAxisSize.max,
-                        crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          Text(
-                            'Bienvenue, Marie Dubois',
-                            style: FlutterFlowTheme.of(context)
-                                .headlineMedium
-                                .override(
-                                  font: GoogleFonts.plusJakartaSans(
-                                    fontWeight: FontWeight.bold,
-                                    fontStyle: FlutterFlowTheme.of(context)
-                                        .headlineMedium
-                                        .fontStyle,
-                                  ),
-                                  color: Color(0xFF14181B),
-                                  fontSize: 28.0,
-                                  letterSpacing: 0.0,
-                                  fontWeight: FontWeight.bold,
-                                  fontStyle: FlutterFlowTheme.of(context)
-                                      .headlineMedium
-                                      .fontStyle,
-                                ),
-                          ),
-                          Padding(
-                            padding: EdgeInsetsDirectional.fromSTEB(
-                                0.0, 4.0, 0.0, 0.0),
-                            child: Text(
-                              'Prestataire de services',
-                              style: FlutterFlowTheme.of(context)
-                                  .bodyMedium
-                                  .override(
-                                    font: GoogleFonts.spaceGrotesk(
-                                      fontWeight: FontWeight.normal,
+                          Column(
+                            mainAxisSize: MainAxisSize.max,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                'Bienvenue, ${profile?.fullName ?? 'Prestataire'}',
+                                style: FlutterFlowTheme.of(context)
+                                    .headlineMedium
+                                    .override(
+                                      font: GoogleFonts.plusJakartaSans(
+                                        fontWeight: FontWeight.bold,
+                                        fontStyle: FlutterFlowTheme.of(context)
+                                            .headlineMedium
+                                            .fontStyle,
+                                      ),
+                                      color: Color(0xFF14181B),
+                                      fontSize: 28.0,
+                                      letterSpacing: 0.0,
+                                      fontWeight: FontWeight.bold,
                                       fontStyle: FlutterFlowTheme.of(context)
-                                          .bodyMedium
+                                          .headlineMedium
                                           .fontStyle,
                                     ),
-                                    color: Color(0xFF57636C),
-                                    fontSize: 14.0,
-                                    letterSpacing: 0.0,
-                                    fontWeight: FontWeight.normal,
-                                    fontStyle: FlutterFlowTheme.of(context)
-                                        .bodyMedium
-                                        .fontStyle,
-                                  ),
+                              ),
+                              Padding(
+                                padding: EdgeInsetsDirectional.fromSTEB(
+                                    0.0, 4.0, 0.0, 0.0),
+                                child: Text(
+                                  'Prestataire de services',
+                                  style: FlutterFlowTheme.of(context)
+                                      .bodyMedium
+                                      .override(
+                                        font: GoogleFonts.spaceGrotesk(
+                                          fontWeight: FontWeight.normal,
+                                          fontStyle: FlutterFlowTheme.of(context)
+                                              .bodyMedium
+                                              .fontStyle,
+                                        ),
+                                        color: Color(0xFF57636C),
+                                        fontSize: 14.0,
+                                        letterSpacing: 0.0,
+                                        fontWeight: FontWeight.normal,
+                                        fontStyle: FlutterFlowTheme.of(context)
+                                            .bodyMedium
+                                            .fontStyle,
+                                      ),
+                                ),
+                              ),
+                            ],
+                          ),
+                          Container(
+                            width: 60.0,
+                            height: 60.0,
+                            decoration: BoxDecoration(
+                              color: Color(0x4CCE035F),
+                              shape: BoxShape.circle,
+                            ),
+                            child: Align(
+                              alignment: AlignmentDirectional(0.0, 0.0),
+                              child: Icon(
+                                Icons.person_rounded,
+                                color: Color(0xFFCE035F),
+                                size: 32.0,
+                              ),
                             ),
                           ),
                         ],
-                      ),
-                      Container(
-                        width: 60.0,
-                        height: 60.0,
-                        decoration: BoxDecoration(
-                          color: Color(0x4CCE035F),
-                          shape: BoxShape.circle,
-                        ),
-                        child: Align(
-                          alignment: AlignmentDirectional(0.0, 0.0),
-                          child: Icon(
-                            Icons.person_rounded,
-                            color: Color(0xFFCE035F),
-                            size: 32.0,
-                          ),
-                        ),
-                      ),
-                    ],
+                      );
+                    },
                   ),
                   Padding(
                     padding: EdgeInsets.all(20.0),
@@ -223,111 +224,128 @@ class _PrestataireHomePageWidgetState extends State<PrestataireHomePageWidget> {
                                         .fontStyle,
                                   ),
                             ),
-                            Row(
-                              mainAxisSize: MainAxisSize.max,
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Column(
-                                  mainAxisSize: MainAxisSize.max,
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Text(
-                                      '€2,450',
-                                      style: FlutterFlowTheme.of(context)
-                                          .displaySmall
-                                          .override(
-                                            font: GoogleFonts.plusJakartaSans(
-                                              fontWeight: FontWeight.bold,
-                                              fontStyle:
-                                                  FlutterFlowTheme.of(context)
-                                                      .displaySmall
-                                                      .fontStyle,
+                            FutureBuilder<List<WalletsRow>>(
+                              future: WalletsTable().queryRows(
+                                queryFn: (q) => q.eqOrNull('prestataire_id', currentUserUid),
+                              ),
+                              builder: (context, walletSnapshot) {
+                                return FutureBuilder<List<RequestsRow>>(
+                                  future: RequestsTable().queryRows(
+                                    queryFn: (q) => q.eqOrNull('prestataire_id', currentUserUid),
+                                  ),
+                                  builder: (context, requestSnapshot) {
+                                    final wallet = walletSnapshot.data?.firstOrNull;
+                                    final requests = requestSnapshot.data ?? [];
+                                    
+                                    return Row(
+                                      mainAxisSize: MainAxisSize.max,
+                                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        Column(
+                                          mainAxisSize: MainAxisSize.max,
+                                          crossAxisAlignment: CrossAxisAlignment.start,
+                                          children: [
+                                            Text(
+                                              '${wallet?.balance?.toStringAsFixed(0) ?? '0'} FCFA',
+                                              style: FlutterFlowTheme.of(context)
+                                                  .displaySmall
+                                                  .override(
+                                                    font: GoogleFonts.plusJakartaSans(
+                                                      fontWeight: FontWeight.bold,
+                                                      fontStyle:
+                                                          FlutterFlowTheme.of(context)
+                                                              .displaySmall
+                                                              .fontStyle,
+                                                    ),
+                                                    color: Color(0xFF39D2C0),
+                                                    fontSize: 34.0,
+                                                    letterSpacing: 0.0,
+                                                    fontWeight: FontWeight.bold,
+                                                    fontStyle:
+                                                        FlutterFlowTheme.of(context)
+                                                            .displaySmall
+                                                            .fontStyle,
+                                                  ),
                                             ),
-                                            color: Color(0xFF39D2C0),
-                                            fontSize: 34.0,
-                                            letterSpacing: 0.0,
-                                            fontWeight: FontWeight.bold,
-                                            fontStyle:
-                                                FlutterFlowTheme.of(context)
-                                                    .displaySmall
-                                                    .fontStyle,
-                                          ),
-                                    ),
-                                    Text(
-                                      'Solde actuel',
-                                      style: FlutterFlowTheme.of(context)
-                                          .bodySmall
-                                          .override(
-                                            font: GoogleFonts.spaceGrotesk(
-                                              fontWeight: FontWeight.normal,
-                                              fontStyle:
-                                                  FlutterFlowTheme.of(context)
-                                                      .bodySmall
-                                                      .fontStyle,
+                                            Text(
+                                              'Solde actuel',
+                                              style: FlutterFlowTheme.of(context)
+                                                  .bodySmall
+                                                  .override(
+                                                    font: GoogleFonts.spaceGrotesk(
+                                                      fontWeight: FontWeight.normal,
+                                                      fontStyle:
+                                                          FlutterFlowTheme.of(context)
+                                                              .bodySmall
+                                                              .fontStyle,
+                                                    ),
+                                                    color: Color(0xFF57636C),
+                                                    fontSize: 12.0,
+                                                    letterSpacing: 0.0,
+                                                    fontWeight: FontWeight.normal,
+                                                    fontStyle:
+                                                        FlutterFlowTheme.of(context)
+                                                            .bodySmall
+                                                            .fontStyle,
+                                                  ),
                                             ),
-                                            color: Color(0xFF57636C),
-                                            fontSize: 12.0,
-                                            letterSpacing: 0.0,
-                                            fontWeight: FontWeight.normal,
-                                            fontStyle:
-                                                FlutterFlowTheme.of(context)
-                                                    .bodySmall
-                                                    .fontStyle,
-                                          ),
-                                    ),
-                                  ],
-                                ),
-                                Column(
-                                  mainAxisSize: MainAxisSize.max,
-                                  crossAxisAlignment: CrossAxisAlignment.end,
-                                  children: [
-                                    Text(
-                                      '12',
-                                      style: FlutterFlowTheme.of(context)
-                                          .displaySmall
-                                          .override(
-                                            font: GoogleFonts.plusJakartaSans(
-                                              fontWeight: FontWeight.bold,
-                                              fontStyle:
-                                                  FlutterFlowTheme.of(context)
-                                                      .displaySmall
-                                                      .fontStyle,
+                                          ],
+                                        ),
+                                        Column(
+                                          mainAxisSize: MainAxisSize.max,
+                                          crossAxisAlignment: CrossAxisAlignment.end,
+                                          children: [
+                                            Text(
+                                              '${requests.length}',
+                                              style: FlutterFlowTheme.of(context)
+                                                  .displaySmall
+                                                  .override(
+                                                    font: GoogleFonts.plusJakartaSans(
+                                                      fontWeight: FontWeight.bold,
+                                                      fontStyle:
+                                                          FlutterFlowTheme.of(context)
+                                                              .displaySmall
+                                                              .fontStyle,
+                                                    ),
+                                                    color: Color(0xFFCE035F),
+                                                    fontSize: 34.0,
+                                                    letterSpacing: 0.0,
+                                                    fontWeight: FontWeight.bold,
+                                                    fontStyle:
+                                                        FlutterFlowTheme.of(context)
+                                                            .displaySmall
+                                                            .fontStyle,
+                                                  ),
                                             ),
-                                            color: Color(0xFFCE035F),
-                                            fontSize: 34.0,
-                                            letterSpacing: 0.0,
-                                            fontWeight: FontWeight.bold,
-                                            fontStyle:
-                                                FlutterFlowTheme.of(context)
-                                                    .displaySmall
-                                                    .fontStyle,
-                                          ),
-                                    ),
-                                    Text(
-                                      'Demandes reçues',
-                                      style: FlutterFlowTheme.of(context)
-                                          .bodySmall
-                                          .override(
-                                            font: GoogleFonts.spaceGrotesk(
-                                              fontWeight: FontWeight.normal,
-                                              fontStyle:
-                                                  FlutterFlowTheme.of(context)
-                                                      .bodySmall
-                                                      .fontStyle,
+                                            Text(
+                                              'Demandes reçues',
+                                              style: FlutterFlowTheme.of(context)
+                                                  .bodySmall
+                                                  .override(
+                                                    font: GoogleFonts.spaceGrotesk(
+                                                      fontWeight: FontWeight.normal,
+                                                      fontStyle:
+                                                          FlutterFlowTheme.of(context)
+                                                              .bodySmall
+                                                              .fontStyle,
+                                                    ),
+                                                    color: Color(0xFF57636C),
+                                                    fontSize: 12.0,
+                                                    letterSpacing: 0.0,
+                                                    fontWeight: FontWeight.normal,
+                                                    fontStyle:
+                                                        FlutterFlowTheme.of(context)
+                                                            .bodySmall
+                                                            .fontStyle,
+                                                  ),
                                             ),
-                                            color: Color(0xFF57636C),
-                                            fontSize: 12.0,
-                                            letterSpacing: 0.0,
-                                            fontWeight: FontWeight.normal,
-                                            fontStyle:
-                                                FlutterFlowTheme.of(context)
-                                                    .bodySmall
-                                                    .fontStyle,
-                                          ),
-                                    ),
-                                  ],
-                                ),
-                              ],
+                                          ],
+                                        ),
+                                      ],
+                                    );
+                                  },
+                                );
+                              },
                             ),
                           ].divide(SizedBox(height: 16.0)),
                         ),
@@ -416,6 +434,12 @@ class _PrestataireHomePageWidgetState extends State<PrestataireHomePageWidget> {
                               onChanged: (newValue) async {
                                 safeSetState(
                                     () => _model.switchValue = newValue!);
+                                
+                                // Update availability in database
+                                await ProfilesTable().update(
+                                  data: {'is_active': newValue},
+                                  matchingRows: (rows) => rows.eq('id', currentUserUid),
+                                );
                               },
                               activeColor: Color(0xFF39D2C0),
                               activeTrackColor: Color(0x4CCE035F),
@@ -428,7 +452,7 @@ class _PrestataireHomePageWidgetState extends State<PrestataireHomePageWidget> {
                     ),
                   ),
                   FFButtonWidget(
-                    onPressed: () {
+                    onPressed: () async {
                       context.pushNamed(DemandesRecuesPageWidget.routeName);
                     },
                     text: 'Voir les demandes reçues',
@@ -481,186 +505,213 @@ class _PrestataireHomePageWidgetState extends State<PrestataireHomePageWidget> {
                     shrinkWrap: true,
                     scrollDirection: Axis.vertical,
                     children: [
-                      Padding(
-                        padding: EdgeInsets.all(16.0),
-                        child: Container(
-                          width: double.infinity,
-                          decoration: BoxDecoration(
-                            color: Color(0x4CCE035F),
-                            borderRadius: BorderRadius.circular(12.0),
-                          ),
-                          child: Padding(
-                            padding: EdgeInsets.all(16.0),
-                            child: Column(
-                              mainAxisSize: MainAxisSize.max,
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Icon(
-                                  Icons.calendar_today_rounded,
-                                  color: Color(0xFFCE035F),
-                                  size: 32.0,
-                                ),
-                                Text(
-                                  'Planning',
-                                  textAlign: TextAlign.center,
-                                  style: FlutterFlowTheme.of(context)
-                                      .bodyMedium
-                                      .override(
-                                        font: GoogleFonts.spaceGrotesk(
+                      InkWell(
+                        onTap: () async {
+                          context.pushNamed(PortefeuillePageWidget.routeName);
+                        },
+                        child: Padding(
+                          padding: EdgeInsets.all(16.0),
+                          child: Container(
+                            width: double.infinity,
+                            decoration: BoxDecoration(
+                              color: Color(0x4CCE035F),
+                              borderRadius: BorderRadius.circular(12.0),
+                            ),
+                            child: Padding(
+                              padding: EdgeInsets.all(16.0),
+                              child: Column(
+                                mainAxisSize: MainAxisSize.max,
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Icon(
+                                    Icons.account_balance_wallet_rounded,
+                                    color: Color(0xFFCE035F),
+                                    size: 32.0,
+                                  ),
+                                  Text(
+                                    'Portefeuille',
+                                    textAlign: TextAlign.center,
+                                    style: FlutterFlowTheme.of(context)
+                                        .bodyMedium
+                                        .override(
+                                          font: GoogleFonts.spaceGrotesk(
+                                            fontWeight: FontWeight.w600,
+                                            fontStyle:
+                                                FlutterFlowTheme.of(context)
+                                                    .bodyMedium
+                                                    .fontStyle,
+                                          ),
+                                          color: Color(0xFFCE035F),
+                                          fontSize: 14.0,
+                                          letterSpacing: 0.0,
                                           fontWeight: FontWeight.w600,
                                           fontStyle:
                                               FlutterFlowTheme.of(context)
                                                   .bodyMedium
                                                   .fontStyle,
                                         ),
-                                        color: Color(0xFFCE035F),
-                                        fontSize: 14.0,
-                                        letterSpacing: 0.0,
-                                        fontWeight: FontWeight.w600,
-                                        fontStyle: FlutterFlowTheme.of(context)
-                                            .bodyMedium
-                                            .fontStyle,
-                                      ),
-                                ),
-                              ].divide(SizedBox(height: 8.0)),
+                                  ),
+                                ].divide(SizedBox(height: 8.0)),
+                              ),
                             ),
                           ),
                         ),
                       ),
-                      Padding(
-                        padding: EdgeInsets.all(16.0),
-                        child: Container(
-                          width: double.infinity,
-                          decoration: BoxDecoration(
-                            color: Color(0x4DD43EED),
-                            borderRadius: BorderRadius.circular(12.0),
-                          ),
-                          child: Padding(
-                            padding: EdgeInsets.all(16.0),
-                            child: Column(
-                              mainAxisSize: MainAxisSize.max,
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Icon(
-                                  Icons.account_balance_wallet_rounded,
-                                  color: Color(0xFFCE035F),
-                                  size: 32.0,
-                                ),
-                                Text(
-                                  'Paiements',
-                                  textAlign: TextAlign.center,
-                                  style: FlutterFlowTheme.of(context)
-                                      .bodyMedium
-                                      .override(
-                                        font: GoogleFonts.spaceGrotesk(
+                      InkWell(
+                        onTap: () async {
+                          context.pushNamed(HistoriquePageWidget.routeName);
+                        },
+                        child: Padding(
+                          padding: EdgeInsets.all(16.0),
+                          child: Container(
+                            width: double.infinity,
+                            decoration: BoxDecoration(
+                              color: Color(0x4C02FFF4),
+                              borderRadius: BorderRadius.circular(12.0),
+                            ),
+                            child: Padding(
+                              padding: EdgeInsets.all(16.0),
+                              child: Column(
+                                mainAxisSize: MainAxisSize.max,
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Icon(
+                                    Icons.history,
+                                    color: Color(0xFFCE035F),
+                                    size: 32.0,
+                                  ),
+                                  Text(
+                                    'Historique',
+                                    textAlign: TextAlign.center,
+                                    style: FlutterFlowTheme.of(context)
+                                        .bodyMedium
+                                        .override(
+                                          font: GoogleFonts.spaceGrotesk(
+                                            fontWeight: FontWeight.w600,
+                                            fontStyle:
+                                                FlutterFlowTheme.of(context)
+                                                    .bodyMedium
+                                                    .fontStyle,
+                                          ),
+                                          color: Color(0xFFCE035F),
+                                          fontSize: 14.0,
+                                          letterSpacing: 0.0,
                                           fontWeight: FontWeight.w600,
                                           fontStyle:
                                               FlutterFlowTheme.of(context)
                                                   .bodyMedium
                                                   .fontStyle,
                                         ),
-                                        color: Color(0xFFCE035F),
-                                        fontSize: 14.0,
-                                        letterSpacing: 0.0,
-                                        fontWeight: FontWeight.w600,
-                                        fontStyle: FlutterFlowTheme.of(context)
-                                            .bodyMedium
-                                            .fontStyle,
-                                      ),
-                                ),
-                              ].divide(SizedBox(height: 8.0)),
+                                  ),
+                                ].divide(SizedBox(height: 8.0)),
+                              ),
                             ),
                           ),
                         ),
                       ),
-                      Padding(
-                        padding: EdgeInsets.all(16.0),
-                        child: Container(
-                          width: double.infinity,
-                          decoration: BoxDecoration(
-                            color: Color(0x4C02FFF4),
-                            borderRadius: BorderRadius.circular(12.0),
-                          ),
-                          child: Padding(
-                            padding: EdgeInsets.all(16.0),
-                            child: Column(
-                              mainAxisSize: MainAxisSize.max,
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Icon(
-                                  Icons.star_rounded,
-                                  color: Color(0xFFCE035F),
-                                  size: 32.0,
-                                ),
-                                Text(
-                                  'Évaluations',
-                                  textAlign: TextAlign.center,
-                                  style: FlutterFlowTheme.of(context)
-                                      .bodyMedium
-                                      .override(
-                                        font: GoogleFonts.spaceGrotesk(
+                      InkWell(
+                        onTap: () async {
+                          // Navigate to reviews page (to be implemented)
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(content: Text('Page des évaluations bientôt disponible')),
+                          );
+                        },
+                        child: Padding(
+                          padding: EdgeInsets.all(16.0),
+                          child: Container(
+                            width: double.infinity,
+                            decoration: BoxDecoration(
+                              color: Color(0x4C02FFF4),
+                              borderRadius: BorderRadius.circular(12.0),
+                            ),
+                            child: Padding(
+                              padding: EdgeInsets.all(16.0),
+                              child: Column(
+                                mainAxisSize: MainAxisSize.max,
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Icon(
+                                    Icons.star_rounded,
+                                    color: Color(0xFFCE035F),
+                                    size: 32.0,
+                                  ),
+                                  Text(
+                                    'Évaluations',
+                                    textAlign: TextAlign.center,
+                                    style: FlutterFlowTheme.of(context)
+                                        .bodyMedium
+                                        .override(
+                                          font: GoogleFonts.spaceGrotesk(
+                                            fontWeight: FontWeight.w600,
+                                            fontStyle:
+                                                FlutterFlowTheme.of(context)
+                                                    .bodyMedium
+                                                    .fontStyle,
+                                          ),
+                                          color: Color(0xFFCE035F),
+                                          fontSize: 14.0,
+                                          letterSpacing: 0.0,
                                           fontWeight: FontWeight.w600,
                                           fontStyle:
                                               FlutterFlowTheme.of(context)
                                                   .bodyMedium
                                                   .fontStyle,
                                         ),
-                                        color: Color(0xFFCE035F),
-                                        fontSize: 14.0,
-                                        letterSpacing: 0.0,
-                                        fontWeight: FontWeight.w600,
-                                        fontStyle: FlutterFlowTheme.of(context)
-                                            .bodyMedium
-                                            .fontStyle,
-                                      ),
-                                ),
-                              ].divide(SizedBox(height: 8.0)),
+                                  ),
+                                ].divide(SizedBox(height: 8.0)),
+                              ),
                             ),
                           ),
                         ),
                       ),
-                      Padding(
-                        padding: EdgeInsets.all(16.0),
-                        child: Container(
-                          width: double.infinity,
-                          decoration: BoxDecoration(
-                            color: Color(0xB3FFFFFF),
-                            borderRadius: BorderRadius.circular(12.0),
-                          ),
-                          child: Padding(
-                            padding: EdgeInsets.all(16.0),
-                            child: Column(
-                              mainAxisSize: MainAxisSize.max,
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Icon(
-                                  Icons.settings_rounded,
-                                  color: Color(0xFFCE035F),
-                                  size: 32.0,
-                                ),
-                                Text(
-                                  'Paramètres',
-                                  textAlign: TextAlign.center,
-                                  style: FlutterFlowTheme.of(context)
-                                      .bodyMedium
-                                      .override(
-                                        font: GoogleFonts.spaceGrotesk(
+                      InkWell(
+                        onTap: () async {
+                          context.pushNamed(SettingsscreenforaPROVIDEWidget.routeName);
+                        },
+                        child: Padding(
+                          padding: EdgeInsets.all(16.0),
+                          child: Container(
+                            width: double.infinity,
+                            decoration: BoxDecoration(
+                              color: Color(0xB3FFFFFF),
+                              borderRadius: BorderRadius.circular(12.0),
+                            ),
+                            child: Padding(
+                              padding: EdgeInsets.all(16.0),
+                              child: Column(
+                                mainAxisSize: MainAxisSize.max,
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Icon(
+                                    Icons.settings_rounded,
+                                    color: Color(0xFFCE035F),
+                                    size: 32.0,
+                                  ),
+                                  Text(
+                                    'Paramètres',
+                                    textAlign: TextAlign.center,
+                                    style: FlutterFlowTheme.of(context)
+                                        .bodyMedium
+                                        .override(
+                                          font: GoogleFonts.spaceGrotesk(
+                                            fontWeight: FontWeight.w600,
+                                            fontStyle:
+                                                FlutterFlowTheme.of(context)
+                                                    .bodyMedium
+                                                    .fontStyle,
+                                          ),
+                                          color: Color(0xFFCE035F),
+                                          fontSize: 14.0,
+                                          letterSpacing: 0.0,
                                           fontWeight: FontWeight.w600,
                                           fontStyle:
                                               FlutterFlowTheme.of(context)
                                                   .bodyMedium
                                                   .fontStyle,
                                         ),
-                                        color: Color(0xFFCE035F),
-                                        fontSize: 14.0,
-                                        letterSpacing: 0.0,
-                                        fontWeight: FontWeight.w600,
-                                        fontStyle: FlutterFlowTheme.of(context)
-                                            .bodyMedium
-                                            .fontStyle,
-                                      ),
-                                ),
-                              ].divide(SizedBox(height: 8.0)),
+                                  ),
+                                ].divide(SizedBox(height: 8.0)),
+                              ),
                             ),
                           ),
                         ),

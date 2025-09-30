@@ -615,7 +615,7 @@ class _PrestataireProfilePageWidgetState
                                             ),
                                           ),
                                         ),
-                                      )),
+                                      )).toList(),
                                 ],
                               ),
                             ),

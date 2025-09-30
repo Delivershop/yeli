@@ -87,7 +87,7 @@ class _ContactPrestatairePageWidgetState
               size: 24.0,
             ),
             onPressed: () {
-              print('IconButton pressed ...');
+              context.safePop();
             },
           ),
           title: Text(
